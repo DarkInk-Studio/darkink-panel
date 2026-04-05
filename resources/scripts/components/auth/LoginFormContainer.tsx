@@ -52,7 +52,7 @@ export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => 
                     }}
                 >
                     <div>
-                        <div css={tw`inline-flex items-center rounded-full px-4 py-2 text-[0.68rem] font-semibold tracking-[0.28em] uppercase text-cyan-200 border border-cyan-400/20 bg-cyan-400/8`}>
+                        <div css={tw`inline-flex items-center rounded-full px-4 py-2 text-[0.68rem] font-semibold tracking-[0.28em] uppercase text-cyan-200 border border-cyan-400/20 bg-cyan-400/10`}>
                             DarkInk Infrastructure
                         </div>
                         <p css={tw`mt-6 text-3xl font-semibold text-neutral-100 leading-tight`}>

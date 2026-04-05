@@ -16,7 +16,7 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         ((!props.isSecondary && !props.color) || props.color === 'primary') &&
         css<Props>`
-            ${(props) => !props.isSecondary && tw`border-transparent text-slate-950`};
+            ${(props) => !props.isSecondary && tw`border-transparent text-black`};
             background: linear-gradient(135deg, #28d0d8 0%, #9cf8fb 100%);
             box-shadow: 0 10px 24px rgba(40, 208, 216, 0.24);
 
@@ -93,7 +93,7 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
                 border-color: rgba(40, 208, 216, 0.26);
                 background: rgba(40, 208, 216, 0.08);
                 ${(props) => props.color === 'red' && tw`bg-red-500 border-red-600 text-red-50`};
-                ${(props) => props.color === 'primary' && tw`text-slate-950`};
+                ${(props) => props.color === 'primary' && tw`text-black`};
                 ${(props) => props.color === 'green' && tw`bg-green-500 border-green-600 text-green-50`};
             }
         `};

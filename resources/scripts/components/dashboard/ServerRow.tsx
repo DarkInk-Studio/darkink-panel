@@ -132,13 +132,13 @@ export default ({ server, className }: { server: Server; className?: string }) =
                 {!stats || isSuspended ? (
                     isSuspended ? (
                         <div css={tw`flex-1 text-center`}>
-                            <span css={tw`rounded-full px-3 py-1 text-red-100 text-xs border border-red-400/20 bg-red-500/15`}>
+                            <span css={tw`rounded-full px-3 py-1 text-red-100 text-xs border border-red-400/20 bg-red-500/20`}>
                                 {server.status === 'suspended' ? 'Suspended' : 'Connection Error'}
                             </span>
                         </div>
                     ) : server.isTransferring || server.status ? (
                         <div css={tw`flex-1 text-center`}>
-                            <span css={tw`rounded-full px-3 py-1 text-neutral-100 text-xs border border-neutral-400/20 bg-neutral-500/15`}>
+                            <span css={tw`rounded-full px-3 py-1 text-neutral-100 text-xs border border-neutral-400/20 bg-neutral-500/20`}>
                                 {server.isTransferring
                                     ? 'Transferring'
                                     : server.status === 'installing'
