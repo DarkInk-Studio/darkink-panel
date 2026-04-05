@@ -57,10 +57,36 @@ export default () => {
     const maintenanceNodes = visibleServers.filter((server) => server.isNodeUnderMaintenance).length;
     const transferringServers = visibleServers.filter((server) => server.isTransferring).length;
     const unlimitedMemoryServers = visibleServers.filter((server) => server.limits.memory === 0).length;
-    const totalMemory = visibleServers.reduce((sum, server) => sum + Math.max(server.limits.memory, 0), 0);
+    const memoryByNode = new Map<number, { nodeMemory: number; serverMemory: number; hasUnlimited: boolean }>();
+
+    visibleServers.forEach((server) => {
+        const existing = memoryByNode.get(server.nodeId) ?? {
+            nodeMemory: Math.max(server.nodeMemory, 0),
+            serverMemory: 0,
+            hasUnlimited: false,
+        };
+
+        existing.nodeMemory = Math.max(existing.nodeMemory, server.nodeMemory);
+        existing.serverMemory += Math.max(server.limits.memory, 0);
+        existing.hasUnlimited = existing.hasUnlimited || server.limits.memory === 0;
+
+        memoryByNode.set(server.nodeId, existing);
+    });
+
+    const totalMemory = Array.from(memoryByNode.values()).reduce((sum, node) => {
+        if (node.hasUnlimited && node.nodeMemory > 0) {
+            return sum + node.nodeMemory;
+        }
+
+        return sum + node.serverMemory;
+    }, 0);
+
+    const unlimitedNodeCapped = Array.from(memoryByNode.values()).filter((node) => node.hasUnlimited && node.nodeMemory > 0).length;
     const totalMemoryLabel =
         visibleServers.length === 0
             ? '0 GB'
+            : unlimitedMemoryServers > 0 && totalMemory > 0
+            ? `${Math.round(totalMemory / 1024)} GB`
             : unlimitedMemoryServers === visibleServers.length
             ? 'Unlimited'
             : unlimitedMemoryServers > 0
@@ -106,9 +132,13 @@ export default () => {
                                     {item.label === 'Visible Servers' && 'Current page after active filters.'}
                                     {item.label === 'Suspended' && 'Servers currently blocked from use.'}
                                     {item.label === 'Maintenance Nodes' && 'Nodes flagged for maintenance.'}
-                                    {item.label === 'Included Memory' && (unlimitedMemoryServers > 0
-                                        ? 'Unlimited servers are shown as uncapped.'
-                                        : 'Summed from the servers shown here.')}
+                                    {item.label === 'Included Memory' && (
+                                        unlimitedMemoryServers > 0
+                                            ? unlimitedNodeCapped > 0
+                                                ? 'Unlimited servers on this page are capped by their assigned node memory.'
+                                                : 'At least one server on this page has no fixed memory limit configured.'
+                                            : 'Summed from the servers shown here.'
+                                    )}
                                 </p>
                             </div>
                         ))}

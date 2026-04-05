@@ -35,9 +35,24 @@
             <![endif]-->
         @show
         <style>
+            :root {
+                --di-admin-bg: #071018;
+                --di-admin-surface: linear-gradient(180deg, rgba(16, 28, 39, 0.94) 0%, rgba(11, 20, 29, 0.9) 100%);
+                --di-admin-panel: rgba(255, 255, 255, 0.04);
+                --di-admin-border: rgba(137, 161, 172, 0.14);
+                --di-admin-border-strong: rgba(40, 208, 216, 0.18);
+                --di-admin-text: #e8f0f6;
+                --di-admin-muted: #8eaab7;
+                --di-admin-accent: #28d0d8;
+                --di-admin-danger: #ff6b74;
+            }
+
             body.hold-transition.skin-blue.fixed.sidebar-mini {
-                background: linear-gradient(180deg, #0a1118 0%, #091119 45%, #071018 100%);
-                color: #e8f0f6;
+                background:
+                    radial-gradient(circle at top center, rgba(40, 208, 216, 0.12), transparent 30%),
+                    radial-gradient(circle at 85% 12%, rgba(255, 255, 255, 0.05), transparent 20%),
+                    linear-gradient(180deg, #0a1118 0%, #091119 45%, #071018 100%);
+                color: var(--di-admin-text);
             }
 
             .wrapper,
@@ -71,18 +86,35 @@
                 background: transparent !important;
             }
 
+            .main-header {
+                position: fixed;
+                top: 14px;
+                left: 14px;
+                right: 14px;
+                z-index: 1002;
+            }
+
             .main-header .logo {
-                color: #e8f0f6 !important;
-                background: rgba(12, 22, 30, 0.86) !important;
-                border-right: 1px solid rgba(137, 161, 172, 0.12);
+                color: var(--di-admin-text) !important;
+                background: rgba(12, 22, 30, 0.9) !important;
+                border: 1px solid var(--di-admin-border);
+                border-right: none;
+                border-radius: 20px 0 0 20px;
                 font-weight: 700;
                 letter-spacing: 0.04em;
+                height: 56px;
+                line-height: 56px;
+                width: 240px;
             }
 
             .main-header .navbar {
-                backdrop-filter: blur(16px);
-                background: rgba(7, 16, 24, 0.76) !important;
-                border-bottom: 1px solid rgba(137, 161, 172, 0.12);
+                margin-left: 240px;
+                height: 56px;
+                min-height: 56px;
+                backdrop-filter: blur(18px);
+                background: rgba(7, 16, 24, 0.86) !important;
+                border: 1px solid var(--di-admin-border);
+                border-radius: 0 20px 20px 0;
             }
 
             .main-header .navbar .nav > li > a,
@@ -94,11 +126,18 @@
             }
 
             .main-sidebar {
-                border-right: 1px solid rgba(137, 161, 172, 0.1);
+                top: 84px !important;
+                left: 14px;
+                bottom: 14px;
+                width: 240px;
+                min-height: 0 !important;
+                border: 1px solid var(--di-admin-border);
+                border-radius: 22px;
+                background: linear-gradient(180deg, rgba(11, 18, 27, 0.92) 0%, rgba(8, 14, 21, 0.88) 100%) !important;
             }
 
             .sidebar {
-                padding-top: 16px;
+                padding-top: 18px;
             }
 
             .sidebar-menu > li.header {
@@ -124,10 +163,13 @@
             .content-wrapper,
             .right-side {
                 min-height: 100vh !important;
+                margin-top: 84px !important;
+                margin-left: 268px !important;
+                padding-bottom: 18px;
             }
 
             .content-header {
-                padding: 24px 28px 8px;
+                padding: 18px 24px 6px;
             }
 
             .content-header > h1 {
@@ -146,7 +188,7 @@
             }
 
             .content {
-                padding: 16px 28px 32px;
+                padding: 14px 24px 28px;
             }
 
             .box,
@@ -155,10 +197,14 @@
             .alert,
             .well,
             .table-responsive {
-                background: linear-gradient(180deg, rgba(16, 28, 39, 0.92) 0%, rgba(11, 20, 29, 0.86) 100%) !important;
-                border: 1px solid rgba(137, 161, 172, 0.14) !important;
+                background: var(--di-admin-surface) !important;
+                border: 1px solid var(--di-admin-border) !important;
                 border-radius: 18px !important;
                 color: #d8e5ea !important;
+            }
+
+            .box {
+                overflow: hidden;
             }
 
             .box-header,
@@ -172,6 +218,16 @@
 
             .box-header.with-border {
                 border-bottom: 1px solid rgba(137, 161, 172, 0.12) !important;
+            }
+
+            .box-header {
+                padding: 16px 18px;
+                background: rgba(255, 255, 255, 0.02);
+            }
+
+            .box-body,
+            .box-footer {
+                padding: 18px;
             }
 
             .box-title,
@@ -194,23 +250,63 @@
             }
 
             .btn {
-                border-radius: 12px !important;
-                border: 1px solid rgba(137, 161, 172, 0.16) !important;
+                border-radius: 10px !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                background: rgba(255, 255, 255, 0.05) !important;
+                color: #ffffff !important;
+                font-weight: 600 !important;
+                transition: background 0.25s cubic-bezier(.16,1,.3,1), border-color 0.25s cubic-bezier(.16,1,.3,1), color 0.25s cubic-bezier(.16,1,.3,1), transform 0.25s cubic-bezier(.16,1,.3,1) !important;
             }
 
             .btn-primary,
             .btn-success,
             .btn-warning,
-            .btn-danger {
-                color: #071018 !important;
-                background: linear-gradient(135deg, #28d0d8 0%, #9cf8fb 100%) !important;
-                border-color: transparent !important;
-            }
-
             .btn-default,
             .btn-secondary {
-                color: #e8f0f6 !important;
-                background: rgba(255, 255, 255, 0.04) !important;
+                color: #ffffff !important;
+                background: rgba(255, 255, 255, 0.05) !important;
+                border-color: rgba(255, 255, 255, 0.1) !important;
+            }
+
+            .btn-primary:hover,
+            .btn-success:hover,
+            .btn-warning:hover,
+            .btn-default:hover,
+            .btn-secondary:hover,
+            .btn:focus,
+            .btn:active {
+                background: linear-gradient(135deg, rgba(0, 191, 207, 0.12), rgba(99, 102, 241, 0.06)) !important;
+                border-color: rgba(0, 191, 207, 0.35) !important;
+                color: var(--di-admin-accent) !important;
+                transform: translateY(-1px);
+            }
+
+            .btn-danger,
+            .btn-danger.disabled,
+            .btn-danger[disabled] {
+                background: rgba(255, 92, 92, 0.1) !important;
+                border-color: rgba(255, 92, 92, 0.28) !important;
+                color: #ff8f96 !important;
+            }
+
+            .btn-danger:hover,
+            .btn-danger:focus,
+            .btn-danger:active {
+                background: rgba(255, 92, 92, 0.16) !important;
+                border-color: rgba(255, 92, 92, 0.42) !important;
+                color: #ffd5d8 !important;
+            }
+
+            .btn.active,
+            .btn-group .btn.active,
+            .btn-group .btn:active,
+            .open > .dropdown-toggle.btn-primary,
+            .open > .dropdown-toggle.btn-success,
+            .open > .dropdown-toggle.btn-warning {
+                background: rgba(0, 191, 207, 0.14) !important;
+                border-color: rgba(0, 191, 207, 0.35) !important;
+                color: var(--di-admin-accent) !important;
+                box-shadow: inset 0 0 0 1px rgba(0, 191, 207, 0.1) !important;
             }
 
             .form-control,
@@ -237,9 +333,101 @@
                 color: #ecfeff !important;
             }
 
+            .table > tbody > tr > td,
+            .table > tbody > tr > th {
+                background: transparent !important;
+            }
+
+            .table > tbody > tr:hover > td,
+            .table > tbody > tr:hover > th {
+                background: rgba(40, 208, 216, 0.06) !important;
+            }
+
+            .nav-tabs-custom > .nav-tabs {
+                padding: 8px 10px 0;
+                background: rgba(255, 255, 255, 0.02);
+            }
+
+            .nav-tabs-custom > .nav-tabs > li {
+                margin-right: 6px;
+            }
+
+            .nav-tabs-custom > .nav-tabs > li > a {
+                border-radius: 12px 12px 0 0;
+                border: 1px solid transparent;
+                padding: 10px 14px;
+            }
+
+            .nav-tabs-custom > .nav-tabs > li.active > a {
+                background: rgba(40, 208, 216, 0.1) !important;
+                border-color: rgba(40, 208, 216, 0.18) !important;
+                border-bottom-color: transparent !important;
+                color: #ecfeff !important;
+            }
+
+            .input-group .input-group-addon {
+                background: rgba(255, 255, 255, 0.05) !important;
+                color: var(--di-admin-muted) !important;
+                border-color: rgba(137, 161, 172, 0.18) !important;
+            }
+
             .main-footer {
+                margin-left: 268px !important;
+                background: transparent !important;
                 border-top: 1px solid rgba(137, 161, 172, 0.1);
                 color: #8eaab7;
+            }
+
+            .user-menu > a {
+                display: flex !important;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .navbar-nav > li > a {
+                height: 56px;
+                display: flex !important;
+                align-items: center;
+            }
+
+            .user-menu .user-image {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                border: 1px solid rgba(255, 255, 255, 0.14);
+            }
+
+            @media (max-width: 991px) {
+                .main-header {
+                    left: 8px;
+                    right: 8px;
+                    top: 8px;
+                }
+
+                .main-header .logo {
+                    width: 188px;
+                }
+
+                .main-header .navbar {
+                    margin-left: 188px;
+                }
+
+                .main-sidebar {
+                    left: 8px;
+                    top: 78px !important;
+                    bottom: 8px;
+                }
+
+                .content-wrapper,
+                .right-side,
+                .main-footer {
+                    margin-left: 0 !important;
+                }
+
+                .content-wrapper,
+                .right-side {
+                    margin-top: 78px !important;
+                }
             }
 
             code {

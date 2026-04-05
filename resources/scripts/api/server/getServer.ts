@@ -33,7 +33,10 @@ export interface Server {
     __deprecatedUuidShort: string;
     uuid: string;
     name: string;
+    nodeId: number;
     node: string;
+    nodeMemory: number;
+    nodeMemoryOverallocate: number;
     isNodeUnderMaintenance: boolean;
     status: ServerStatus;
     sftpDetails: {
@@ -69,7 +72,10 @@ export const rawDataToServerObject = ({ attributes: data }: FractalResponseData)
     __deprecatedUuidShort: data.__deprecated_uuid_short,
     uuid: data.uuid,
     name: data.name,
+    nodeId: data.node_id,
     node: data.node,
+    nodeMemory: data.node_memory,
+    nodeMemoryOverallocate: data.node_memory_overallocate,
     isNodeUnderMaintenance: data.is_node_under_maintenance,
     status: data.status,
     invocation: data.invocation,

@@ -49,7 +49,10 @@ class ServerTransformer extends BaseClientTransformer
             'internal_id' => $server->id,
             'uuid' => $server->uuid,
             'name' => $server->name,
+            'node_id' => $server->node_id,
             'node' => $server->node->name,
+            'node_memory' => $server->node->memory,
+            'node_memory_overallocate' => $server->node->memory_overallocate,
             'is_node_under_maintenance' => $server->node->isUnderMaintenance(),
             'sftp_details' => [
                 'ip' => $server->node->fqdn,

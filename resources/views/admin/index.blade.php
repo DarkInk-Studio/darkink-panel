@@ -36,18 +36,29 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-6 col-sm-3 text-center">
-        <a href="{{ $version->getDiscord() }}"><button class="btn btn-warning" style="width:100%;"><i class="fa fa-fw fa-support"></i> Get Help <small>(Discord)</small></button></a>
-    </div>
-    <div class="col-xs-6 col-sm-3 text-center">
-        <a href="https://pterodactyl.io"><button class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-link"></i> Upstream Docs</button></a>
-    </div>
-    <div class="clearfix visible-xs-block">&nbsp;</div>
-    <div class="col-xs-6 col-sm-3 text-center">
-        <a href="https://github.com/pterodactyl/panel"><button class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-code-fork"></i> Upstream GitHub</button></a>
-    </div>
-    <div class="col-xs-6 col-sm-3 text-center">
-        <a href="{{ $version->getDonations() }}"><button class="btn btn-success" style="width:100%;"><i class="fa fa-fw fa-money"></i> Support the Project</button></a>
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Operations Links</h3>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3 text-center">
+                        <a href="{{ $version->getDiscord() }}" class="btn btn-warning" style="width:100%;"><i class="fa fa-fw fa-support"></i> Get Help <small>(Discord)</small></a>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 text-center">
+                        <a href="https://pterodactyl.io" class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-link"></i> Upstream Docs</a>
+                    </div>
+                    <div class="clearfix visible-xs-block">&nbsp;</div>
+                    <div class="col-xs-6 col-sm-3 text-center">
+                        <a href="https://github.com/pterodactyl/panel" class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-code-fork"></i> Upstream GitHub</a>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 text-center">
+                        <a href="{{ $version->getDonations() }}" class="btn btn-success" style="width:100%;"><i class="fa fa-fw fa-money"></i> Support the Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
