@@ -7,18 +7,24 @@ export interface Props {
 }
 
 const light = css<Props>`
-    ${tw`bg-white border-neutral-200 text-neutral-800`};
+    color: #eff7fb;
+    background: linear-gradient(180deg, rgba(18, 31, 41, 0.94) 0%, rgba(12, 22, 30, 0.88) 100%);
+    border-color: rgba(137, 161, 172, 0.18);
     &:focus {
         ${tw`border-primary-400`}
     }
 
     &:disabled {
-        ${tw`bg-neutral-100 border-neutral-200`};
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(137, 161, 172, 0.14);
+        color: rgba(232, 240, 246, 0.72);
     }
 `;
 
 const checkboxStyle = css<Props>`
-    ${tw`bg-neutral-500 cursor-pointer appearance-none inline-block align-middle select-none flex-shrink-0 w-4 h-4 text-primary-400 border border-neutral-300 rounded-sm`};
+    ${tw`cursor-pointer appearance-none inline-block align-middle select-none flex-shrink-0 w-4 h-4 text-primary-400 border rounded-sm`};
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(137, 161, 172, 0.28);
     color-adjust: exact;
     background-origin: border-box;
     transition: all 75ms linear, box-shadow 25ms linear;
@@ -37,15 +43,17 @@ const checkboxStyle = css<Props>`
 `;
 
 const inputStyle = css<Props>`
-    // Reset to normal styling.
     resize: none;
     ${tw`appearance-none outline-none w-full min-w-0`};
-    ${tw`p-3 border-2 rounded text-sm transition-all duration-150`};
-    ${tw`bg-neutral-600 border-neutral-500 hover:border-neutral-400 text-neutral-200 shadow-none focus:ring-0`};
+    ${tw`p-3 border rounded-xl text-sm transition-all duration-150`};
+    ${tw`hover:border-neutral-400 text-neutral-200 shadow-none focus:ring-0`};
+    background: linear-gradient(180deg, rgba(18, 31, 41, 0.94) 0%, rgba(12, 22, 30, 0.88) 100%);
+    border-color: rgba(137, 161, 172, 0.18);
+    backdrop-filter: blur(10px);
 
     & + .input-help {
         ${tw`mt-1 text-xs`};
-        ${(props) => (props.hasError ? tw`text-red-200` : tw`text-neutral-200`)};
+        ${(props) => (props.hasError ? tw`text-red-200` : tw`text-neutral-300`)};
     }
 
     &:required,
@@ -54,7 +62,7 @@ const inputStyle = css<Props>`
     }
 
     &:not(:disabled):not(:read-only):focus {
-        ${tw`shadow-md border-primary-300 ring-2 ring-primary-400 ring-opacity-50`};
+        ${tw`shadow-md border-primary-300 ring-2 ring-primary-400 ring-opacity-30`};
         ${(props) => props.hasError && tw`border-red-300 ring-red-200`};
     }
 

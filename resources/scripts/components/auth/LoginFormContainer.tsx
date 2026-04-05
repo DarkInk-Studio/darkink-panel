@@ -10,6 +10,8 @@ type Props = React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, 
 };
 
 const Container = styled.div`
+    ${tw`px-4`};
+
     ${breakpoint('sm')`
         ${tw`w-4/5 mx-auto`}
     `};
@@ -30,25 +32,54 @@ const Container = styled.div`
 
 export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => (
     <Container>
-        {title && <h2 css={tw`text-3xl text-center text-neutral-100 font-medium py-4`}>{title}</h2>}
+        {title && <h2 css={tw`text-4xl text-center text-neutral-100 font-semibold py-4 tracking-tight`}>{title}</h2>}
         <FlashMessageRender css={tw`mb-2 px-1`} />
         <Form {...props} ref={ref}>
-            <div css={tw`md:flex w-full bg-white shadow-lg rounded-lg p-6 md:pl-0 mx-1`}>
-                <div css={tw`flex-none select-none mb-6 md:mb-0 self-center`}>
-                    <img src={'/assets/svgs/pterodactyl.svg'} css={tw`block w-48 md:w-64 mx-auto`} />
+            <div
+                css={tw`w-full rounded-[28px] p-2 md:p-3 mx-1 lg:grid lg:grid-cols-[0.92fr,1.08fr] overflow-hidden`}
+                style={{
+                    background: 'linear-gradient(180deg, rgba(14, 26, 36, 0.92) 0%, rgba(9, 17, 25, 0.94) 100%)',
+                    border: '1px solid rgba(137, 161, 172, 0.14)',
+                    boxShadow: '0 30px 70px rgba(0, 0, 0, 0.36)',
+                    backdropFilter: 'blur(18px)',
+                }}
+            >
+                <div
+                    css={tw`rounded-[22px] p-8 md:p-10 flex flex-col justify-between min-h-[20rem] mb-4 lg:mb-0`}
+                    style={{
+                        background:
+                            'radial-gradient(circle at top left, rgba(40, 208, 216, 0.18), transparent 40%), linear-gradient(180deg, rgba(14, 31, 40, 0.94) 0%, rgba(9, 18, 26, 0.94) 100%)',
+                    }}
+                >
+                    <div>
+                        <div css={tw`inline-flex items-center rounded-full px-4 py-2 text-[0.68rem] font-semibold tracking-[0.28em] uppercase text-cyan-200 border border-cyan-400/20 bg-cyan-400/8`}>
+                            DarkInk Infrastructure
+                        </div>
+                        <p css={tw`mt-6 text-3xl font-semibold text-neutral-100 leading-tight`}>
+                            Fast orchestration, cleaner insights, and a panel that feels like DarkInk.
+                        </p>
+                        <p css={tw`mt-4 text-sm text-neutral-300 leading-6 max-w-md`}>
+                            Manage nodes, deployments, backups, and live server activity in a tighter interface that matches the main platform instead of the stock panel look.
+                        </p>
+                    </div>
+                    <div css={tw`mt-8`}>
+                        <img src={'/assets/svgs/darkink-panel.svg'} css={tw`block w-full max-w-[19rem]`} />
+                    </div>
                 </div>
-                <div css={tw`flex-1`}>{props.children}</div>
+                <div css={tw`rounded-[22px] p-6 md:p-10 flex items-center`} style={{ background: 'rgba(255, 255, 255, 0.02)' }}>
+                    <div css={tw`flex-1`}>{props.children}</div>
+                </div>
             </div>
         </Form>
         <p css={tw`text-center text-neutral-500 text-xs mt-4`}>
-            &copy; 2015 - {new Date().getFullYear()}&nbsp;
+            DarkInk Panel &copy; {new Date().getFullYear()}&nbsp;
             <a
                 rel={'noopener nofollow noreferrer'}
                 href={'https://pterodactyl.io'}
                 target={'_blank'}
                 css={tw`no-underline text-neutral-500 hover:text-neutral-300`}
             >
-                Pterodactyl Software
+                Powered by Pterodactyl
             </a>
         </p>
     </Container>

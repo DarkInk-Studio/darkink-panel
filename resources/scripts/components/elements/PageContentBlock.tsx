@@ -13,7 +13,7 @@ export interface PageContentBlockProps {
 const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey, className, children }) => {
     useEffect(() => {
         if (title) {
-            document.title = title;
+            document.title = `${title} | DarkInk Panel`;
         }
     }, [title]);
 
@@ -25,16 +25,17 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
                     {children}
                 </ContentContainer>
                 <ContentContainer css={tw`mb-4`}>
-                    <p css={tw`text-center text-neutral-500 text-xs`}>
+                    <p css={tw`text-center text-neutral-500 text-xs tracking-wide uppercase`}>
+                        DarkInk Panel · 
                         <a
                             rel={'noopener nofollow noreferrer'}
                             href={'https://pterodactyl.io'}
                             target={'_blank'}
                             css={tw`no-underline text-neutral-500 hover:text-neutral-300`}
                         >
-                            Pterodactyl&reg;
+                            Powered by Pterodactyl
                         </a>
-                        &nbsp;&copy; 2015 - {new Date().getFullYear()}
+                        &nbsp;· {new Date().getFullYear()}
                     </p>
                 </ContentContainer>
             </>

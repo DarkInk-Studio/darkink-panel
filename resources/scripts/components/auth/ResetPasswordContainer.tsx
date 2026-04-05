@@ -61,9 +61,9 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
             })}
         >
             {({ isSubmitting }) => (
-                <LoginFormContainer title={'Reset Password'} css={tw`w-full flex`}>
+                <LoginFormContainer title={'Neues Passwort setzen'} css={tw`w-full flex`}>
                     <div>
-                        <label>Email</label>
+                        <label css={tw`block text-xs uppercase text-neutral-300 mb-2 tracking-[0.18em] font-semibold`}>Email</label>
                         <Input value={email} isLight disabled />
                     </div>
                     <div css={tw`mt-6`}>
@@ -86,7 +86,7 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
                     <div css={tw`mt-6 text-center`}>
                         <Link
                             to={'/auth/login'}
-                            css={tw`text-xs text-neutral-500 tracking-wide no-underline uppercase hover:text-neutral-600`}
+                            css={tw`text-xs text-neutral-400 tracking-wide no-underline uppercase hover:text-neutral-200`}
                         >
                             Return to Login
                         </Link>

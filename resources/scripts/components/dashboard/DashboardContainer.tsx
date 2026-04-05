@@ -52,11 +52,17 @@ export default () => {
         if (!error) clearFlashes('dashboard');
     }, [error]);
 
+    const visibleServers = servers?.items ?? [];
+    const suspendedServers = visibleServers.filter((server) => server.status === 'suspended').length;
+    const maintenanceNodes = visibleServers.filter((server) => server.isNodeUnderMaintenance).length;
+    const transferringServers = visibleServers.filter((server) => server.isTransferring).length;
+    const totalMemory = visibleServers.reduce((sum, server) => sum + Math.max(server.limits.memory, 0), 0);
+
     return (
         <PageContentBlock title={'Dashboard'} showFlashKey={'dashboard'}>
             {rootAdmin && (
-                <div css={tw`mb-2 flex justify-end items-center`}>
-                    <p css={tw`uppercase text-xs text-neutral-400 mr-2`}>
+                <div css={tw`mb-6 flex justify-end items-center`}>
+                    <p css={tw`uppercase text-xs text-neutral-400 mr-2 tracking-[0.18em]`}>
                         {showOnlyAdmin ? "Showing others' servers" : 'Showing your servers'}
                     </p>
                     <Switch
@@ -69,21 +75,61 @@ export default () => {
             {!servers ? (
                 <Spinner centered size={'large'} />
             ) : (
-                <Pagination data={servers} onPageSelect={setPage}>
-                    {({ items }) =>
-                        items.length > 0 ? (
-                            items.map((server, index) => (
-                                <ServerRow key={server.uuid} server={server} css={index > 0 ? tw`mt-2` : undefined} />
-                            ))
-                        ) : (
-                            <p css={tw`text-center text-sm text-neutral-400`}>
-                                {showOnlyAdmin
-                                    ? 'There are no other servers to display.'
-                                    : 'There are no servers associated with your account.'}
-                            </p>
-                        )
-                    }
-                </Pagination>
+                <>
+                    <div css={tw`grid gap-4 md:grid-cols-2 xl:grid-cols-4 mb-6`}>
+                        {[
+                            { label: 'Visible Servers', value: visibleServers.length.toString(), tone: 'rgba(40, 208, 216, 0.18)' },
+                            { label: 'Suspended', value: suspendedServers.toString(), tone: 'rgba(241, 111, 132, 0.18)' },
+                            { label: 'Maintenance Nodes', value: maintenanceNodes.toString(), tone: 'rgba(255, 255, 255, 0.08)' },
+                            { label: 'Included Memory', value: `${Math.round(totalMemory / 1024)} GB`, tone: 'rgba(124, 236, 240, 0.14)' },
+                        ].map((item) => (
+                            <div
+                                key={item.label}
+                                css={tw`rounded-2xl p-5 border`}
+                                style={{
+                                    background: `linear-gradient(180deg, ${item.tone} 0%, rgba(11, 20, 29, 0.84) 100%)`,
+                                    borderColor: 'var(--panel-border)',
+                                    boxShadow: '0 18px 40px rgba(0, 0, 0, 0.24)',
+                                }}
+                            >
+                                <p css={tw`text-xs uppercase tracking-[0.22em] text-neutral-400`}>{item.label}</p>
+                                <p css={tw`mt-3 text-3xl font-semibold text-neutral-100 tracking-tight`}>{item.value}</p>
+                                <p css={tw`mt-2 text-sm text-neutral-300`}>
+                                    {item.label === 'Visible Servers' && 'Current page after active filters.'}
+                                    {item.label === 'Suspended' && 'Servers currently blocked from use.'}
+                                    {item.label === 'Maintenance Nodes' && 'Nodes flagged for maintenance.'}
+                                    {item.label === 'Included Memory' && 'Summed from the servers shown here.'}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                    {transferringServers > 0 && (
+                        <div
+                            css={tw`mb-6 rounded-2xl border px-5 py-4 text-sm text-neutral-200`}
+                            style={{
+                                background: 'rgba(40, 208, 216, 0.08)',
+                                borderColor: 'rgba(40, 208, 216, 0.16)',
+                            }}
+                        >
+                            {transferringServers} server{transferringServers === 1 ? '' : 's'} on this page are currently transferring.
+                        </div>
+                    )}
+                    <Pagination data={servers} onPageSelect={setPage}>
+                        {({ items }) =>
+                            items.length > 0 ? (
+                                items.map((server, index) => (
+                                    <ServerRow key={server.uuid} server={server} css={index > 0 ? tw`mt-4` : undefined} />
+                                ))
+                            ) : (
+                                <p css={tw`text-center text-sm text-neutral-400`}>
+                                    {showOnlyAdmin
+                                        ? 'There are no other servers to display.'
+                                        : 'There are no servers associated with your account.'}
+                                </p>
+                            )
+                        }
+                    </Pagination>
+                </>
             )}
         </PageContentBlock>
     );
