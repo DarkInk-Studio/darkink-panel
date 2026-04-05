@@ -44,7 +44,7 @@ export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => 
                 }}
             >
                 <div
-                    css={tw`rounded-[22px] p-8 md:p-10 flex flex-col justify-between min-h-[20rem] mb-4 lg:mb-0`}
+                    css={tw`rounded-[22px] p-8 md:p-10 flex flex-col justify-center min-h-[20rem] mb-4 lg:mb-0`}
                     style={{
                         background:
                             'radial-gradient(circle at top left, rgba(40, 208, 216, 0.18), transparent 40%), linear-gradient(180deg, rgba(14, 31, 40, 0.94) 0%, rgba(9, 18, 26, 0.94) 100%)',
@@ -55,34 +55,15 @@ export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => 
                             DarkInk Panel
                         </div>
                         <p css={tw`mt-6 text-3xl font-semibold text-neutral-100 leading-tight`}>
-                            Server, Deployments und Backups an einem Ort.
+                            Zentrale Steuerung fuer deine Server.
                         </p>
                         <p css={tw`mt-4 text-sm text-neutral-300 leading-6 max-w-md`}>
-                            Melde dich mit deinem Panel-Konto an, um Nodes zu verwalten, Auslastung im Blick zu behalten und Wartungen ohne Umwege zu steuern.
+                            Hier verwaltest du Instanzen, Ressourcen und geplante Aufgaben im DarkInk-Setup. Melde dich mit deinem Panel-Konto an, um direkt weiterzuarbeiten.
                         </p>
-                    </div>
-                    <div css={tw`mt-8 grid gap-3 sm:grid-cols-2`}>
-                        <div
-                            css={tw`rounded-2xl px-4 py-4 border border-cyan-400/10`}
-                            style={{ background: 'rgba(8, 17, 24, 0.58)' }}
-                        >
-                            <div css={tw`text-[0.68rem] uppercase tracking-[0.22em] text-cyan-200/80 font-semibold`}>
-                                Verwaltung
-                            </div>
-                            <div css={tw`mt-2 text-sm text-neutral-100 font-medium leading-6`}>
-                                Nodes, Ressourcen und laufende Instanzen direkt im Zugriff.
-                            </div>
-                        </div>
-                        <div
-                            css={tw`rounded-2xl px-4 py-4 border border-white/10`}
-                            style={{ background: 'rgba(255, 255, 255, 0.03)' }}
-                        >
-                            <div css={tw`text-[0.68rem] uppercase tracking-[0.22em] text-neutral-300 font-semibold`}>
-                                Workflow
-                            </div>
-                            <div css={tw`mt-2 text-sm text-neutral-100 font-medium leading-6`}>
-                                Deployments, Backups und Zeitpläne ohne Stock-Panel-Chaos.
-                            </div>
+                        <div css={tw`mt-8 pt-6 border-t border-white/10 max-w-md`}>
+                            <p css={tw`text-xs uppercase tracking-[0.24em] text-neutral-400 font-semibold`}>
+                                Zugriff nur fuer freigeschaltete Panel-Konten
+                            </p>
                         </div>
                     </div>
                 </div>
