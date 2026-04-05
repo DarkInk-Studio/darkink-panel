@@ -52,17 +52,38 @@ export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => 
                 >
                     <div>
                         <div css={tw`inline-flex items-center rounded-full px-4 py-2 text-[0.68rem] font-semibold tracking-[0.28em] uppercase text-cyan-200 border border-cyan-400/20 bg-cyan-400/10`}>
-                            DarkInk Infrastructure
+                            DarkInk Panel
                         </div>
                         <p css={tw`mt-6 text-3xl font-semibold text-neutral-100 leading-tight`}>
-                            Fast orchestration, cleaner insights, and a panel that feels like DarkInk.
+                            Server, Deployments und Backups an einem Ort.
                         </p>
                         <p css={tw`mt-4 text-sm text-neutral-300 leading-6 max-w-md`}>
-                            Manage nodes, deployments, backups, and live server activity in a tighter interface that matches the main platform instead of the stock panel look.
+                            Melde dich mit deinem Panel-Konto an, um Nodes zu verwalten, Auslastung im Blick zu behalten und Wartungen ohne Umwege zu steuern.
                         </p>
                     </div>
-                    <div css={tw`mt-8`}>
-                        <img src={'/assets/svgs/darkink-panel.svg'} css={tw`block w-full max-w-[19rem]`} />
+                    <div css={tw`mt-8 grid gap-3 sm:grid-cols-2`}>
+                        <div
+                            css={tw`rounded-2xl px-4 py-4 border border-cyan-400/10`}
+                            style={{ background: 'rgba(8, 17, 24, 0.58)' }}
+                        >
+                            <div css={tw`text-[0.68rem] uppercase tracking-[0.22em] text-cyan-200/80 font-semibold`}>
+                                Verwaltung
+                            </div>
+                            <div css={tw`mt-2 text-sm text-neutral-100 font-medium leading-6`}>
+                                Nodes, Ressourcen und laufende Instanzen direkt im Zugriff.
+                            </div>
+                        </div>
+                        <div
+                            css={tw`rounded-2xl px-4 py-4 border border-white/6`}
+                            style={{ background: 'rgba(255, 255, 255, 0.03)' }}
+                        >
+                            <div css={tw`text-[0.68rem] uppercase tracking-[0.22em] text-neutral-300 font-semibold`}>
+                                Workflow
+                            </div>
+                            <div css={tw`mt-2 text-sm text-neutral-100 font-medium leading-6`}>
+                                Deployments, Backups und Zeitpläne ohne Stock-Panel-Chaos.
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div css={tw`rounded-[22px] p-6 md:p-10 flex items-center`} style={{ background: 'rgba(255, 255, 255, 0.02)' }}>
