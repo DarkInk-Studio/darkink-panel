@@ -25,7 +25,7 @@ const ServerResult = styled(Link)`
     ${tw`flex items-center bg-neutral-900 p-4 rounded border-l-4 border-neutral-900 no-underline transition-all duration-150`};
 
     &:hover {
-        ${tw`shadow border-cyan-500`};
+        ${tw`border-cyan-500`};
     }
 
     &:not(:last-of-type) {

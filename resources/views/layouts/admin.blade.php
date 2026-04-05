@@ -34,6 +34,219 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
             <![endif]-->
         @show
+        <style>
+            body.hold-transition.skin-blue.fixed.sidebar-mini {
+                background: linear-gradient(180deg, #0a1118 0%, #091119 45%, #071018 100%);
+                color: #e8f0f6;
+            }
+
+            .wrapper,
+            .content-wrapper,
+            .main-sidebar,
+            .main-header .navbar,
+            .main-header .logo,
+            .main-footer,
+            .box,
+            .small-box,
+            .info-box,
+            .alert,
+            .callout,
+            .nav-tabs-custom,
+            .modal-content,
+            .form-control,
+            .select2-container--default .select2-selection--single,
+            .select2-container--default .select2-selection--multiple,
+            .btn,
+            .table-responsive,
+            .well {
+                box-shadow: none !important;
+            }
+
+            .main-header .logo,
+            .main-header .navbar,
+            .main-sidebar,
+            .main-footer,
+            .content-wrapper,
+            .right-side {
+                background: transparent !important;
+            }
+
+            .main-header .logo {
+                color: #e8f0f6 !important;
+                background: rgba(12, 22, 30, 0.86) !important;
+                border-right: 1px solid rgba(137, 161, 172, 0.12);
+                font-weight: 700;
+                letter-spacing: 0.04em;
+            }
+
+            .main-header .navbar {
+                backdrop-filter: blur(16px);
+                background: rgba(7, 16, 24, 0.76) !important;
+                border-bottom: 1px solid rgba(137, 161, 172, 0.12);
+            }
+
+            .main-header .navbar .nav > li > a,
+            .main-header .logo,
+            .main-sidebar .sidebar-menu > li > a,
+            .content-header > .breadcrumb > li > a,
+            .main-footer a {
+                color: #d8e5ea !important;
+            }
+
+            .main-sidebar {
+                border-right: 1px solid rgba(137, 161, 172, 0.1);
+            }
+
+            .sidebar {
+                padding-top: 16px;
+            }
+
+            .sidebar-menu > li.header {
+                color: #688391 !important;
+                background: transparent !important;
+                letter-spacing: 0.16em;
+                font-weight: 700;
+            }
+
+            .sidebar-menu > li > a {
+                border-left: 0 !important;
+                border-radius: 14px;
+                margin: 2px 12px;
+                padding: 12px 16px;
+            }
+
+            .sidebar-menu > li:hover > a,
+            .sidebar-menu > li.active > a {
+                background: rgba(40, 208, 216, 0.08) !important;
+                color: #ecfeff !important;
+            }
+
+            .content-wrapper,
+            .right-side {
+                min-height: 100vh !important;
+            }
+
+            .content-header {
+                padding: 24px 28px 8px;
+            }
+
+            .content-header > h1 {
+                color: #e8f0f6;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+            }
+
+            .content-header > h1 > small,
+            .breadcrumb > .active,
+            .text-muted,
+            .help-block,
+            .small,
+            .text-gray {
+                color: #8eaab7 !important;
+            }
+
+            .content {
+                padding: 16px 28px 32px;
+            }
+
+            .box,
+            .nav-tabs-custom,
+            .modal-content,
+            .alert,
+            .well,
+            .table-responsive {
+                background: linear-gradient(180deg, rgba(16, 28, 39, 0.92) 0%, rgba(11, 20, 29, 0.86) 100%) !important;
+                border: 1px solid rgba(137, 161, 172, 0.14) !important;
+                border-radius: 18px !important;
+                color: #d8e5ea !important;
+            }
+
+            .box-header,
+            .box-footer,
+            .nav-tabs-custom > .nav-tabs,
+            .table > thead > tr > th,
+            .table > tbody > tr > td,
+            .table > tbody > tr > th {
+                border-color: rgba(137, 161, 172, 0.12) !important;
+            }
+
+            .box-header.with-border {
+                border-bottom: 1px solid rgba(137, 161, 172, 0.12) !important;
+            }
+
+            .box-title,
+            .control-label,
+            label,
+            .table,
+            .table a,
+            .nav-tabs-custom > .nav-tabs > li.active > a,
+            .nav-tabs-custom > .nav-tabs > li > a:hover {
+                color: #e8f0f6 !important;
+            }
+
+            .nav-tabs-custom > .nav-tabs > li > a,
+            .table > thead > tr > th,
+            code,
+            .text-blue,
+            .description-block > .description-header,
+            .description-block > .description-text {
+                color: #8eaab7 !important;
+            }
+
+            .btn {
+                border-radius: 12px !important;
+                border: 1px solid rgba(137, 161, 172, 0.16) !important;
+            }
+
+            .btn-primary,
+            .btn-success,
+            .btn-warning,
+            .btn-danger {
+                color: #071018 !important;
+                background: linear-gradient(135deg, #28d0d8 0%, #9cf8fb 100%) !important;
+                border-color: transparent !important;
+            }
+
+            .btn-default,
+            .btn-secondary {
+                color: #e8f0f6 !important;
+                background: rgba(255, 255, 255, 0.04) !important;
+            }
+
+            .form-control,
+            .select2-container--default .select2-selection--single,
+            .select2-container--default .select2-selection--multiple {
+                color: #e8f0f6 !important;
+                background: linear-gradient(180deg, rgba(18, 31, 41, 0.94) 0%, rgba(12, 22, 30, 0.88) 100%) !important;
+                border-color: rgba(137, 161, 172, 0.18) !important;
+            }
+
+            .select2-dropdown,
+            .select2-results__option,
+            .dropdown-menu,
+            .dropdown-menu > li > a {
+                background: #0f1a24 !important;
+                color: #d8e5ea !important;
+                border-color: rgba(137, 161, 172, 0.12) !important;
+            }
+
+            .table-hover > tbody > tr:hover,
+            .dropdown-menu > li > a:hover,
+            .select2-results__option--highlighted[aria-selected] {
+                background: rgba(40, 208, 216, 0.1) !important;
+                color: #ecfeff !important;
+            }
+
+            .main-footer {
+                border-top: 1px solid rgba(137, 161, 172, 0.1);
+                color: #8eaab7;
+            }
+
+            code {
+                background: rgba(255, 255, 255, 0.05) !important;
+                border-color: rgba(137, 161, 172, 0.12) !important;
+            }
+        </style>
     </head>
     <body class="hold-transition skin-blue fixed sidebar-mini">
         <div class="wrapper">

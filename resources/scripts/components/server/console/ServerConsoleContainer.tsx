@@ -16,6 +16,10 @@ export type PowerAction = 'start' | 'stop' | 'restart' | 'kill';
 const ServerConsoleContainer = () => {
     const name = ServerContext.useStoreState((state) => state.server.data!.name);
     const description = ServerContext.useStoreState((state) => state.server.data!.description);
+    const node = ServerContext.useStoreState((state) => state.server.data!.node);
+    const dockerImage = ServerContext.useStoreState((state) => state.server.data!.dockerImage);
+    const featureLimits = ServerContext.useStoreState((state) => state.server.data!.featureLimits);
+    const allocations = ServerContext.useStoreState((state) => state.server.data!.allocations.length);
     const isInstalling = ServerContext.useStoreState((state) => state.server.isInstalling);
     const isTransferring = ServerContext.useStoreState((state) => state.server.data!.isTransferring);
     const eggFeatures = ServerContext.useStoreState((state) => state.server.data!.eggFeatures, isEqual);
@@ -38,6 +42,26 @@ const ServerConsoleContainer = () => {
                         {name}
                     </h1>
                     <p className={'text-sm line-clamp-2'}>{description}</p>
+                    <div className={'mt-4 flex flex-wrap gap-2'}>
+                        {[
+                            { label: 'Node', value: node },
+                            { label: 'Image', value: dockerImage },
+                            { label: 'Allocations', value: allocations.toString() },
+                            { label: 'Backups', value: featureLimits.backups.toString() },
+                        ].map((item) => (
+                            <div
+                                key={item.label}
+                                className={'rounded-full border px-3 py-2 text-xs uppercase tracking-[0.18em] text-gray-300'}
+                                style={{
+                                    background: 'rgba(255, 255, 255, 0.02)',
+                                    borderColor: 'rgba(137, 161, 172, 0.16)',
+                                }}
+                            >
+                                <span className={'text-gray-400 mr-2'}>{item.label}</span>
+                                <span className={'text-gray-100 normal-case tracking-normal'}>{item.value}</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className={'col-span-4 sm:col-span-2 lg:col-span-1 self-end'}>
                     <Can action={['control.start', 'control.stop', 'control.restart']} matchAny>

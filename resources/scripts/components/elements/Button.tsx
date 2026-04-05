@@ -18,11 +18,9 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         css<Props>`
             ${(props) => !props.isSecondary && tw`border-transparent text-black`};
             background: linear-gradient(135deg, #28d0d8 0%, #9cf8fb 100%);
-            box-shadow: 0 10px 24px rgba(40, 208, 216, 0.24);
 
             &:hover:not(:disabled) {
                 transform: translateY(-1px);
-                box-shadow: 0 16px 30px rgba(40, 208, 216, 0.32);
             }
         `};
 

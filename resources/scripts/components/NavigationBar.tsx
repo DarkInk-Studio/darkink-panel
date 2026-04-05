@@ -14,13 +14,14 @@ import Tooltip from '@/components/elements/tooltip/Tooltip';
 import Avatar from '@/components/Avatar';
 
 const Shell = styled.div`
-    ${tw`w-full overflow-x-auto`};
+    ${tw`w-full`};
     position: sticky;
     top: 0;
     z-index: 40;
     background: rgba(7, 16, 24, 0.72);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(137, 161, 172, 0.12);
+    overflow: visible;
 `;
 
 const BrandBlock = styled(Link)`
@@ -33,7 +34,6 @@ const BrandMark = styled.div`
     height: 2.75rem;
     background: linear-gradient(135deg, rgba(40, 208, 216, 0.24) 0%, rgba(255, 255, 255, 0.08) 100%);
     border: 1px solid rgba(40, 208, 216, 0.18);
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.24);
 `;
 
 const BrandTitle = styled.div`
@@ -61,7 +61,8 @@ const RightNavigation = styled.div`
         &:active,
         &:hover,
         &.active {
-            box-shadow: inset 0 -2px ${theme`colors.cyan.500`.toString()}, 0 0 0 1px rgba(40, 208, 216, 0.08);
+            border-color: rgba(40, 208, 216, 0.18);
+            outline: 1px solid rgba(40, 208, 216, 0.08);
         }
     }
 `;

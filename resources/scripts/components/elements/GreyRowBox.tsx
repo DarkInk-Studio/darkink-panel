@@ -6,7 +6,6 @@ export default styled.div<{ $hoverable?: boolean }>`
 
     background: linear-gradient(180deg, rgba(15, 26, 36, 0.92) 0%, rgba(10, 18, 27, 0.84) 100%);
     border-color: var(--panel-border);
-    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
     backdrop-filter: blur(14px);
 
     ${(props) => props.$hoverable !== false && tw`hover:-translate-y-1`};
@@ -16,7 +15,6 @@ export default styled.div<{ $hoverable?: boolean }>`
         `
             &:hover {
                 border-color: rgba(40, 208, 216, 0.24);
-                box-shadow: 0 28px 64px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(40, 208, 216, 0.1);
             }
         `};
 

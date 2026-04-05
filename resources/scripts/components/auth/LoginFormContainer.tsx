@@ -40,7 +40,6 @@ export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => 
                 style={{
                     background: 'linear-gradient(180deg, rgba(14, 26, 36, 0.92) 0%, rgba(9, 17, 25, 0.94) 100%)',
                     border: '1px solid rgba(137, 161, 172, 0.14)',
-                    boxShadow: '0 30px 70px rgba(0, 0, 0, 0.36)',
                     backdropFilter: 'blur(18px)',
                 }}
             >

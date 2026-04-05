@@ -56,7 +56,16 @@ export default () => {
     const suspendedServers = visibleServers.filter((server) => server.status === 'suspended').length;
     const maintenanceNodes = visibleServers.filter((server) => server.isNodeUnderMaintenance).length;
     const transferringServers = visibleServers.filter((server) => server.isTransferring).length;
+    const unlimitedMemoryServers = visibleServers.filter((server) => server.limits.memory === 0).length;
     const totalMemory = visibleServers.reduce((sum, server) => sum + Math.max(server.limits.memory, 0), 0);
+    const totalMemoryLabel =
+        visibleServers.length === 0
+            ? '0 GB'
+            : unlimitedMemoryServers === visibleServers.length
+            ? 'Unlimited'
+            : unlimitedMemoryServers > 0
+            ? `${Math.round(totalMemory / 1024)}+ GB`
+            : `${Math.round(totalMemory / 1024)} GB`;
 
     return (
         <PageContentBlock title={'Dashboard'} showFlashKey={'dashboard'}>
@@ -81,7 +90,7 @@ export default () => {
                             { label: 'Visible Servers', value: visibleServers.length.toString(), tone: 'rgba(40, 208, 216, 0.18)' },
                             { label: 'Suspended', value: suspendedServers.toString(), tone: 'rgba(241, 111, 132, 0.18)' },
                             { label: 'Maintenance Nodes', value: maintenanceNodes.toString(), tone: 'rgba(255, 255, 255, 0.08)' },
-                            { label: 'Included Memory', value: `${Math.round(totalMemory / 1024)} GB`, tone: 'rgba(124, 236, 240, 0.14)' },
+                            { label: 'Included Memory', value: totalMemoryLabel, tone: 'rgba(124, 236, 240, 0.14)' },
                         ].map((item) => (
                             <div
                                 key={item.label}
@@ -89,7 +98,6 @@ export default () => {
                                 style={{
                                     background: `linear-gradient(180deg, ${item.tone} 0%, rgba(11, 20, 29, 0.84) 100%)`,
                                     borderColor: 'var(--panel-border)',
-                                    boxShadow: '0 18px 40px rgba(0, 0, 0, 0.24)',
                                 }}
                             >
                                 <p css={tw`text-xs uppercase tracking-[0.22em] text-neutral-400`}>{item.label}</p>
@@ -98,7 +106,9 @@ export default () => {
                                     {item.label === 'Visible Servers' && 'Current page after active filters.'}
                                     {item.label === 'Suspended' && 'Servers currently blocked from use.'}
                                     {item.label === 'Maintenance Nodes' && 'Nodes flagged for maintenance.'}
-                                    {item.label === 'Included Memory' && 'Summed from the servers shown here.'}
+                                    {item.label === 'Included Memory' && (unlimitedMemoryServers > 0
+                                        ? 'Unlimited servers are shown as uncapped.'
+                                        : 'Summed from the servers shown here.')}
                                 </p>
                             </div>
                         ))}
