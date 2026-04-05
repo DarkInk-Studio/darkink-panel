@@ -74,7 +74,7 @@ export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => 
                             </div>
                         </div>
                         <div
-                            css={tw`rounded-2xl px-4 py-4 border border-white/6`}
+                            css={tw`rounded-2xl px-4 py-4 border border-white/10`}
                             style={{ background: 'rgba(255, 255, 255, 0.03)' }}
                         >
                             <div css={tw`text-[0.68rem] uppercase tracking-[0.22em] text-neutral-300 font-semibold`}>
