@@ -36,37 +36,13 @@ export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => 
         <FlashMessageRender css={tw`mb-2 px-1`} />
         <Form {...props} ref={ref}>
             <div
-                css={tw`w-full rounded-[28px] p-2 md:p-3 mx-1 lg:grid lg:grid-cols-[0.92fr,1.08fr] overflow-hidden`}
+                css={tw`w-full rounded-[28px] p-2 md:p-3 mx-1 overflow-hidden`}
                 style={{
                     background: 'linear-gradient(180deg, rgba(14, 26, 36, 0.92) 0%, rgba(9, 17, 25, 0.94) 100%)',
                     border: '1px solid rgba(137, 161, 172, 0.14)',
                     backdropFilter: 'blur(18px)',
                 }}
             >
-                <div
-                    css={tw`rounded-[22px] p-8 md:p-10 flex flex-col justify-center min-h-[20rem] mb-4 lg:mb-0`}
-                    style={{
-                        background:
-                            'radial-gradient(circle at top left, rgba(40, 208, 216, 0.18), transparent 40%), linear-gradient(180deg, rgba(14, 31, 40, 0.94) 0%, rgba(9, 18, 26, 0.94) 100%)',
-                    }}
-                >
-                    <div>
-                        <div css={tw`inline-flex items-center rounded-full px-4 py-2 text-[0.68rem] font-semibold tracking-[0.28em] uppercase text-cyan-200 border border-cyan-400/20 bg-cyan-400/10`}>
-                            DarkInk Panel
-                        </div>
-                        <p css={tw`mt-6 text-3xl font-semibold text-neutral-100 leading-tight`}>
-                            Zentrale Steuerung fuer deine Server.
-                        </p>
-                        <p css={tw`mt-4 text-sm text-neutral-300 leading-6 max-w-md`}>
-                            Hier verwaltest du Instanzen, Ressourcen und geplante Aufgaben im DarkInk-Setup. Melde dich mit deinem Panel-Konto an, um direkt weiterzuarbeiten.
-                        </p>
-                        <div css={tw`mt-8 pt-6 border-t border-white/10 max-w-md`}>
-                            <p css={tw`text-xs uppercase tracking-[0.24em] text-neutral-400 font-semibold`}>
-                                Zugriff nur fuer freigeschaltete Panel-Konten
-                            </p>
-                        </div>
-                    </div>
-                </div>
                 <div css={tw`rounded-[22px] p-6 md:p-10 flex items-center`} style={{ background: 'rgba(255, 255, 255, 0.02)' }}>
                     <div css={tw`flex-1`}>{props.children}</div>
                 </div>
