@@ -18,26 +18,14 @@ const Shell = styled.div`
     position: sticky;
     top: 0;
     z-index: 40;
-    background: transparent;
-    padding: 1rem 0.75rem 0;
-`;
-
-const ShellFrame = styled.div`
-    ${tw`mx-auto w-full`};
-    max-width: 1360px;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.75rem 1rem;
-    border-radius: 1.25rem;
-    background: linear-gradient(115deg, rgba(8, 14, 22, 0.92), rgba(10, 16, 25, 0.86));
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(18px);
+    background: rgba(7, 16, 24, 0.72);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(137, 161, 172, 0.12);
+    overflow: visible;
 `;
 
 const BrandBlock = styled(Link)`
-    ${tw`no-underline flex items-center gap-4 px-2 py-1 min-w-0`};
+    ${tw`no-underline flex items-center gap-4 px-4 py-3 min-w-0`};
 `;
 
 const BrandMark = styled.div`
@@ -53,42 +41,7 @@ const BrandTitle = styled.div`
 `;
 
 const BrandMeta = styled.div`
-    ${tw`text-cyan-300 text-xs uppercase tracking-[0.24em] truncate`};
-`;
-
-const CenterNavigation = styled.div`
-    ${tw`hidden lg:flex items-center justify-center min-w-0`};
-`;
-
-const CenterRail = styled.div`
-    ${tw`flex items-center gap-2 px-2 py-2 rounded-2xl`};
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-`;
-
-const CenterLink = styled(NavLink)`
-    ${tw`no-underline text-sm font-medium px-4 py-2 rounded-xl transition-all duration-150`};
-    color: rgba(196, 205, 216, 0.82);
-    border: 1px solid transparent;
-
-    &:hover,
-    &.active {
-        color: rgb(244, 248, 253);
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(40, 208, 216, 0.14);
-    }
-`;
-
-const CenterAnchor = styled.a`
-    ${tw`no-underline text-sm font-medium px-4 py-2 rounded-xl transition-all duration-150`};
-    color: rgba(196, 205, 216, 0.82);
-    border: 1px solid transparent;
-
-    &:hover {
-        color: rgb(244, 248, 253);
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(40, 208, 216, 0.14);
-    }
+    ${tw`text-neutral-400 text-xs uppercase tracking-[0.24em] truncate`};
 `;
 
 const RightNavigation = styled.div`
@@ -130,8 +83,8 @@ export default () => {
     return (
         <Shell>
             <SpinnerOverlay visible={isLoggingOut} />
-            <ShellFrame>
-                <div id={'logo'} className={'min-w-0'}>
+            <div className={'mx-auto w-full flex items-center gap-4 min-h-[4.75rem] max-w-[1360px] px-2 sm:px-4'}>
+                <div id={'logo'} className={'flex-1 min-w-0'}>
                     <BrandBlock to={'/'}>
                         <BrandMark>
                             <span className={'text-sm font-bold tracking-[0.24em] text-cyan-300'}>DI</span>
@@ -142,21 +95,6 @@ export default () => {
                         </div>
                     </BrandBlock>
                 </div>
-                <CenterNavigation>
-                    <CenterRail>
-                        <CenterLink to={'/'} exact>
-                            Dashboard
-                        </CenterLink>
-                        <CenterLink to={'/account'}>
-                            Account
-                        </CenterLink>
-                        {rootAdmin && (
-                            <CenterAnchor href={'/admin'} rel={'noreferrer'}>
-                                Admin
-                            </CenterAnchor>
-                        )}
-                    </CenterRail>
-                </CenterNavigation>
                 <RightNavigation className={'flex items-center justify-center gap-2'}>
                     <SearchContainer />
                     <Tooltip placement={'bottom'} content={'Dashboard'}>
@@ -184,7 +122,7 @@ export default () => {
                         </button>
                     </Tooltip>
                 </RightNavigation>
-            </ShellFrame>
+            </div>
         </Shell>
     );
 };
