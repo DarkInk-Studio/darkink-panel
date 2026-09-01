@@ -29,7 +29,7 @@
                 @if ($version->isLatestPanel())
                     You are running DarkInk Panel on top of Pterodactyl version <code>{{ config('app.version') }}</code>. Everything is current.
                 @else
-                    Your panel base is <strong>not up-to-date!</strong> The latest upstream version is <a href="https://github.com/Pterodactyl/Panel/releases/v{{ $version->getPanel() }}" target="_blank"><code>{{ $version->getPanel() }}</code></a> and you are currently running version <code>{{ config('app.version') }}</code>.
+                    Your DarkInk Panel base is <strong>not up-to-date!</strong> The latest upstream version is <a href="https://github.com/Pterodactyl/Panel/releases/v{{ $version->getPanel() }}" target="_blank" rel="noopener noreferrer"><code>{{ $version->getPanel() }}</code></a> and you are currently running version <code>{{ config('app.version') }}</code>. Review the <a href="https://pterodactyl.io/panel/1.0/updating.html" target="_blank" rel="noopener noreferrer">official update instructions</a> before upgrading.
                 @endif
             </div>
         </div>
