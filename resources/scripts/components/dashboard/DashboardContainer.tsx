@@ -81,7 +81,9 @@ export default () => {
         return sum + node.serverMemory;
     }, 0);
 
-    const unlimitedNodeCapped = Array.from(memoryByNode.values()).filter((node) => node.hasUnlimited && node.nodeMemory > 0).length;
+    const unlimitedNodeCapped = Array.from(memoryByNode.values()).filter(
+        (node) => node.hasUnlimited && node.nodeMemory > 0
+    ).length;
     const totalMemoryLabel =
         visibleServers.length === 0
             ? '0 GB'
@@ -111,54 +113,61 @@ export default () => {
                 <Spinner centered size={'large'} />
             ) : (
                 <>
-                    <div css={tw`grid gap-4 md:grid-cols-2 xl:grid-cols-4 mb-6`}>
+                    <div css={tw`grid gap-3 md:grid-cols-2 xl:grid-cols-4 mb-5`}>
                         {[
-                            { label: 'Visible Servers', value: visibleServers.length.toString(), tone: 'rgba(40, 208, 216, 0.18)' },
-                            { label: 'Suspended', value: suspendedServers.toString(), tone: 'rgba(241, 111, 132, 0.18)' },
-                            { label: 'Maintenance Nodes', value: maintenanceNodes.toString(), tone: 'rgba(255, 255, 255, 0.08)' },
-                            { label: 'Included Memory', value: totalMemoryLabel, tone: 'rgba(124, 236, 240, 0.14)' },
+                            { label: 'Visible Servers', value: visibleServers.length.toString(), tone: '#00bfcf' },
+                            { label: 'Suspended', value: suspendedServers.toString(), tone: '#ef6a78' },
+                            { label: 'Maintenance Nodes', value: maintenanceNodes.toString(), tone: '#91a3b2' },
+                            { label: 'Included Memory', value: totalMemoryLabel, tone: '#71e3ec' },
                         ].map((item) => (
                             <div
                                 key={item.label}
-                                css={tw`rounded-2xl p-5 border`}
+                                css={tw`rounded-xl p-4 border border-t-2`}
                                 style={{
-                                    background: `linear-gradient(180deg, ${item.tone} 0%, rgba(11, 20, 29, 0.84) 100%)`,
+                                    background: 'var(--panel-background)',
                                     borderColor: 'var(--panel-border)',
+                                    borderTopColor: item.tone,
                                 }}
                             >
-                                <p css={tw`text-xs uppercase tracking-[0.22em] text-neutral-400`}>{item.label}</p>
-                                <p css={tw`mt-3 text-3xl font-semibold text-neutral-100 tracking-tight`}>{item.value}</p>
-                                <p css={tw`mt-2 text-sm text-neutral-300`}>
+                                <p css={tw`text-xs uppercase tracking-[0.16em] text-neutral-400`}>{item.label}</p>
+                                <p css={tw`mt-2 text-2xl font-semibold text-neutral-100 tracking-tight`}>
+                                    {item.value}
+                                </p>
+                                <p css={tw`mt-1 text-xs text-neutral-400`}>
                                     {item.label === 'Visible Servers' && 'Current page after active filters.'}
                                     {item.label === 'Suspended' && 'Servers currently blocked from use.'}
                                     {item.label === 'Maintenance Nodes' && 'Nodes flagged for maintenance.'}
-                                    {item.label === 'Included Memory' && (
-                                        unlimitedMemoryServers > 0
+                                    {item.label === 'Included Memory' &&
+                                        (unlimitedMemoryServers > 0
                                             ? unlimitedNodeCapped > 0
                                                 ? 'Unlimited servers on this page are capped by their assigned node memory.'
                                                 : 'At least one server on this page has no fixed memory limit configured.'
-                                            : 'Summed from the servers shown here.'
-                                    )}
+                                            : 'Summed from the servers shown here.')}
                                 </p>
                             </div>
                         ))}
                     </div>
                     {transferringServers > 0 && (
                         <div
-                            css={tw`mb-6 rounded-2xl border px-5 py-4 text-sm text-neutral-200`}
+                            css={tw`mb-5 rounded-xl border px-4 py-3 text-sm text-neutral-200`}
                             style={{
-                                background: 'rgba(40, 208, 216, 0.08)',
-                                borderColor: 'rgba(40, 208, 216, 0.16)',
+                                background: 'var(--panel-highlight)',
+                                borderColor: 'rgba(0, 191, 207, 0.28)',
                             }}
                         >
-                            {transferringServers} server{transferringServers === 1 ? '' : 's'} on this page are currently transferring.
+                            {transferringServers} server{transferringServers === 1 ? '' : 's'} on this page are
+                            currently transferring.
                         </div>
                     )}
                     <Pagination data={servers} onPageSelect={setPage}>
                         {({ items }) =>
                             items.length > 0 ? (
                                 items.map((server, index) => (
-                                    <ServerRow key={server.uuid} server={server} css={index > 0 ? tw`mt-4` : undefined} />
+                                    <ServerRow
+                                        key={server.uuid}
+                                        server={server}
+                                        css={index > 0 ? tw`mt-4` : undefined}
+                                    />
                                 ))
                             ) : (
                                 <p css={tw`text-center text-sm text-neutral-400`}>

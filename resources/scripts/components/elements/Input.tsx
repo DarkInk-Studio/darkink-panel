@@ -8,15 +8,15 @@ export interface Props {
 
 const light = css<Props>`
     color: #eff7fb;
-    background: linear-gradient(180deg, rgba(18, 31, 41, 0.94) 0%, rgba(12, 22, 30, 0.88) 100%);
-    border-color: rgba(137, 161, 172, 0.18);
+    background: var(--panel-background-strong);
+    border-color: var(--panel-border);
     &:focus {
         ${tw`border-primary-400`}
     }
 
     &:disabled {
-        background: rgba(255, 255, 255, 0.04);
-        border-color: rgba(137, 161, 172, 0.14);
+        background: var(--panel-background);
+        border-color: var(--panel-border);
         color: rgba(232, 240, 246, 0.72);
     }
 `;
@@ -27,7 +27,7 @@ const checkboxStyle = css<Props>`
     border-color: rgba(137, 161, 172, 0.28);
     color-adjust: exact;
     background-origin: border-box;
-    transition: all 75ms linear, box-shadow 25ms linear;
+    transition: border-color 75ms linear, background-color 75ms linear;
 
     &:checked {
         ${tw`border-transparent bg-no-repeat bg-center`};
@@ -38,18 +38,17 @@ const checkboxStyle = css<Props>`
 
     &:focus {
         ${tw`outline-none border-primary-300`};
-        box-shadow: 0 0 0 1px rgba(9, 103, 210, 0.25);
+        box-shadow: none;
     }
 `;
 
 const inputStyle = css<Props>`
     resize: none;
     ${tw`appearance-none outline-none w-full min-w-0`};
-    ${tw`p-3 border rounded-xl text-sm transition-all duration-150`};
+    ${tw`p-3 border rounded-xl text-sm transition-colors duration-150`};
     ${tw`hover:border-neutral-400 text-neutral-200 shadow-none focus:ring-0`};
-    background: linear-gradient(180deg, rgba(18, 31, 41, 0.94) 0%, rgba(12, 22, 30, 0.88) 100%);
-    border-color: rgba(137, 161, 172, 0.18);
-    backdrop-filter: blur(10px);
+    background: var(--panel-background-strong);
+    border-color: var(--panel-border);
 
     & + .input-help {
         ${tw`mt-1 text-xs`};
@@ -62,12 +61,12 @@ const inputStyle = css<Props>`
     }
 
     &:not(:disabled):not(:read-only):focus {
-        ${tw`shadow-md border-primary-300 ring-2 ring-primary-400 ring-opacity-30`};
-        ${(props) => props.hasError && tw`border-red-300 ring-red-200`};
+        ${tw`shadow-none border-primary-400`};
+        ${(props) => props.hasError && tw`border-red-300`};
     }
 
     &:disabled {
-        ${tw`opacity-75`};
+        ${tw`opacity-60 cursor-not-allowed`};
     }
 
     ${(props) => props.isLight && light};

@@ -1,5 +1,3 @@
-const colors = require('tailwindcss/colors');
-
 const gray = {
     50: '#edf4f7',
     100: '#d8e5ea',
@@ -13,10 +11,21 @@ const gray = {
     900: '#091119',
 };
 
+const cyan = {
+    50: '#e8fcfd',
+    100: '#c4f6f8',
+    200: '#8cecf1',
+    300: '#52dfe7',
+    400: '#20ccd9',
+    500: '#00bfcf',
+    600: '#009baa',
+    700: '#087b88',
+    800: '#0d626c',
+    900: '#104f57',
+};
+
 module.exports = {
-    content: [
-        './resources/scripts/**/*.{js,ts,tsx}',
-    ],
+    content: ['./resources/scripts/**/*.{js,ts,tsx}'],
     theme: {
         extend: {
             fontFamily: {
@@ -27,22 +36,18 @@ module.exports = {
                 black: '#071018',
                 // "primary" and "neutral" are deprecated, prefer the use of "blue" and "gray"
                 // in new code.
-                primary: colors.cyan,
-                gray: gray,
+                primary: cyan,
+                gray,
                 neutral: gray,
-                cyan: colors.cyan,
+                cyan,
             },
             fontSize: {
                 '2xs': '0.625rem',
             },
-            boxShadow: {
-                panel: '0 24px 60px rgba(0, 0, 0, 0.38)',
-                glow: '0 0 0 1px rgba(40, 208, 216, 0.12), 0 18px 44px rgba(0, 0, 0, 0.32)',
-            },
             transitionDuration: {
                 250: '250ms',
             },
-            borderColor: theme => ({
+            borderColor: (theme) => ({
                 default: theme('colors.neutral.400', 'currentColor'),
             }),
         },
@@ -52,5 +57,5 @@ module.exports = {
         require('@tailwindcss/forms')({
             strategy: 'class',
         }),
-    ]
+    ],
 };

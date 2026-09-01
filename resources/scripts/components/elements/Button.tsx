@@ -11,16 +11,17 @@ interface Props {
 }
 
 const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
-    ${tw`relative inline-block rounded-xl p-2 uppercase tracking-[0.18em] text-sm transition-all duration-150 border font-semibold`};
+    ${tw`relative inline-block rounded-xl p-2 text-sm transition-colors duration-150 border font-semibold`};
+    box-shadow: none;
 
     ${(props) =>
         ((!props.isSecondary && !props.color) || props.color === 'primary') &&
         css<Props>`
             ${(props) => !props.isSecondary && tw`border-transparent text-black`};
-            background: linear-gradient(135deg, #28d0d8 0%, #9cf8fb 100%);
+            background: var(--panel-accent);
 
             &:hover:not(:disabled) {
-                transform: translateY(-1px);
+                background: var(--panel-accent-hover);
             }
         `};
 
@@ -28,19 +29,18 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         props.color === 'grey' &&
         css`
             ${tw`text-neutral-50`};
-            background: linear-gradient(180deg, rgba(42, 59, 70, 0.95) 0%, rgba(24, 40, 51, 0.95) 100%);
-            border-color: rgba(137, 161, 172, 0.2);
+            background: var(--panel-background-muted);
+            border-color: var(--panel-border);
 
             &:hover:not(:disabled) {
-                border-color: rgba(40, 208, 216, 0.18);
+                border-color: var(--panel-border-strong);
             }
         `};
 
     ${(props) =>
         props.color === 'green' &&
         css<Props>`
-            ${tw`border-green-600 text-green-50`};
-            background: linear-gradient(135deg, #1ea672 0%, #37d99a 100%);
+            ${tw`border-green-600 text-green-50 bg-green-600`};
 
             &:hover:not(:disabled) {
                 ${tw`border-green-700`};
@@ -58,8 +58,7 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         props.color === 'red' &&
         css<Props>`
-            ${tw`border-red-600 text-red-50`};
-            background: linear-gradient(135deg, #c8495d 0%, #f16f84 100%);
+            ${tw`border-red-600 text-red-50 bg-red-600`};
 
             &:hover:not(:disabled) {
                 ${tw`border-red-700`};
@@ -83,13 +82,12 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         props.isSecondary &&
         css<Props>`
             ${tw`text-neutral-100`};
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(137, 161, 172, 0.18);
-            backdrop-filter: blur(10px);
+            background: var(--panel-background-strong);
+            border-color: var(--panel-border);
 
             &:hover:not(:disabled) {
-                border-color: rgba(40, 208, 216, 0.26);
-                background: rgba(40, 208, 216, 0.08);
+                border-color: var(--panel-border-strong);
+                background: var(--panel-highlight);
                 ${(props) => props.color === 'red' && tw`bg-red-500 border-red-600 text-red-50`};
                 ${(props) => props.color === 'primary' && tw`text-black`};
                 ${(props) => props.color === 'green' && tw`bg-green-500 border-green-600 text-green-50`};
@@ -97,10 +95,14 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         `};
 
     &:disabled {
-        opacity: 0.55;
-        cursor: default;
-        transform: none;
+        opacity: 0.48;
+        cursor: not-allowed;
         box-shadow: none;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--panel-accent);
+        outline-offset: 2px;
     }
 `;
 

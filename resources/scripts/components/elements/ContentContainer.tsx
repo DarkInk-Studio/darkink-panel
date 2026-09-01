@@ -3,8 +3,8 @@ import { breakpoint } from '@/theme';
 import tw from 'twin.macro';
 
 const ContentContainer = styled.div`
-    max-width: 1360px;
-    ${tw`mx-4`};
+    max-width: 1440px;
+    ${tw`mx-4 sm:mx-6`};
 
     ${breakpoint('xl')`
         ${tw`mx-auto`};

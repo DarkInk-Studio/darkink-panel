@@ -15,14 +15,20 @@ export default createGlobalStyle`
 
     :root {
         color-scheme: dark;
-        --panel-background: rgba(11, 20, 29, 0.78);
-        --panel-background-strong: rgba(14, 26, 36, 0.94);
-        --panel-border: rgba(130, 190, 204, 0.14);
-        --panel-highlight: rgba(40, 208, 216, 0.22);
-        --panel-text: #e8f0f6;
-        --panel-muted: #89a1ac;
-        --panel-accent: #28d0d8;
-        --panel-accent-soft: #7cecf0;
+        --panel-page: #080f17;
+        --panel-background: #0d1721;
+        --panel-background-strong: #111c27;
+        --panel-background-muted: #162330;
+        --panel-border: #223241;
+        --panel-border-strong: #315063;
+        --panel-highlight: rgba(0, 191, 207, 0.12);
+        --panel-text: #e7eef4;
+        --panel-muted: #91a3b2;
+        --panel-accent: #00bfcf;
+        --panel-accent-hover: #20ccd9;
+        --panel-accent-soft: #71e3ec;
+        --panel-danger: #ef6a78;
+        --panel-success: #35c884;
     }
 
     html, body, #app {
@@ -31,39 +37,10 @@ export default createGlobalStyle`
 
     body {
         ${tw`font-sans text-neutral-200`};
-        letter-spacing: 0.015em;
-        background:
-            radial-gradient(circle at top left, rgba(40, 208, 216, 0.14), transparent 28%),
-            radial-gradient(circle at 85% 12%, rgba(255, 255, 255, 0.09), transparent 18%),
-            linear-gradient(180deg, #0a1118 0%, #091119 45%, #071018 100%);
+        letter-spacing: 0.005em;
+        background: var(--panel-page);
         color: var(--panel-text);
         overflow-x: hidden;
-    }
-
-    body::before,
-    body::after {
-        content: '';
-        position: fixed;
-        inset: auto;
-        width: 28rem;
-        height: 28rem;
-        border-radius: 9999px;
-        pointer-events: none;
-        filter: blur(90px);
-        opacity: 0.18;
-        z-index: -1;
-    }
-
-    body::before {
-        top: -8rem;
-        left: -10rem;
-        background: #28d0d8;
-    }
-
-    body::after {
-        right: -10rem;
-        bottom: -10rem;
-        background: #6e8498;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -78,8 +55,15 @@ export default createGlobalStyle`
         color: inherit;
     }
 
+    a:focus-visible,
+    button:focus-visible,
+    [role='button']:focus-visible {
+        outline: 2px solid var(--panel-accent);
+        outline-offset: 2px;
+    }
+
     ::selection {
-        background: rgba(40, 208, 216, 0.28);
+        background: rgba(0, 191, 207, 0.28);
         color: #f5fbff;
     }
 
@@ -109,11 +93,12 @@ export default createGlobalStyle`
     }
 
     ::-webkit-scrollbar-thumb {
-        border: solid 0 rgb(0 0 0 / 0%);
+        background: #334656;
+        border: solid transparent;
         border-right-width: 4px;
         border-left-width: 4px;
-        -webkit-border-radius: 9px 4px;
-        -webkit-box-shadow: inset 0 0 0 1px rgba(136, 161, 172, 0.55), inset 0 0 0 4px rgba(15, 26, 36, 0.9);
+        background-clip: padding-box;
+        border-radius: 9999px;
     }
 
     ::-webkit-scrollbar-track-piece {
@@ -125,7 +110,7 @@ export default createGlobalStyle`
         border-left-width: 0;
         border-top-width: 4px;
         border-bottom-width: 4px;
-        -webkit-border-radius: 4px 9px;
+        border-radius: 9999px;
     }
 
     ::-webkit-scrollbar-corner {

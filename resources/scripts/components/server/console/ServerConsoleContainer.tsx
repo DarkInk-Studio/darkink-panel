@@ -51,11 +51,9 @@ const ServerConsoleContainer = () => {
                         ].map((item) => (
                             <div
                                 key={item.label}
-                                className={'rounded-full border px-3 py-2 text-xs uppercase tracking-[0.18em] text-gray-300'}
-                                style={{
-                                    background: 'rgba(255, 255, 255, 0.02)',
-                                    borderColor: 'rgba(137, 161, 172, 0.16)',
-                                }}
+                                className={
+                                    'rounded-lg border border-gray-600 bg-gray-800 px-3 py-2 text-xs uppercase tracking-[0.12em] text-gray-300'
+                                }
                             >
                                 <span className={'text-gray-400 mr-2'}>{item.label}</span>
                                 <span className={'text-gray-100 normal-case tracking-normal'}>{item.value}</span>

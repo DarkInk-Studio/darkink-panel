@@ -32,18 +32,20 @@ const Container = styled.div`
 
 export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => (
     <Container>
-        {title && <h2 css={tw`text-4xl text-center text-neutral-100 font-semibold py-4 tracking-tight`}>{title}</h2>}
+        {title && <h2 css={tw`text-3xl text-center text-neutral-100 font-semibold py-4 tracking-tight`}>{title}</h2>}
         <FlashMessageRender css={tw`mb-2 px-1`} />
         <Form {...props} ref={ref}>
             <div
-                css={tw`w-full rounded-[28px] p-2 md:p-3 mx-1 overflow-hidden`}
+                css={tw`w-full rounded-xl p-1 mx-1 overflow-hidden border`}
                 style={{
-                    background: 'linear-gradient(180deg, rgba(14, 26, 36, 0.92) 0%, rgba(9, 17, 25, 0.94) 100%)',
-                    border: '1px solid rgba(137, 161, 172, 0.14)',
-                    backdropFilter: 'blur(18px)',
+                    background: 'var(--panel-background)',
+                    borderColor: 'var(--panel-border)',
                 }}
             >
-                <div css={tw`rounded-[22px] p-6 md:p-10 flex items-center`} style={{ background: 'rgba(255, 255, 255, 0.02)' }}>
+                <div
+                    css={tw`rounded-lg p-6 md:p-8 flex items-center`}
+                    style={{ background: 'var(--panel-background-strong)' }}
+                >
                     <div css={tw`flex-1`}>{props.children}</div>
                 </div>
             </div>

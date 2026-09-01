@@ -31,8 +31,9 @@ const StatusIndicatorBox = styled(GreyRowBox)<{ $status: ServerPowerState | unde
     ${tw`grid grid-cols-12 gap-4 relative`};
 
     & .status-bar {
-        ${tw`w-[0.35rem] bg-red-500 absolute right-0 z-20 rounded-full m-2 opacity-60 transition-all duration-150`};
+        ${tw`w-1 bg-red-500 absolute left-0 z-20 rounded-r-full opacity-80 transition-colors duration-150`};
         height: calc(100% - 0.5rem);
+        top: 0.25rem;
 
         ${({ $status }) =>
             !$status || $status === 'offline'
@@ -98,11 +99,26 @@ export default ({ server, className }: { server: Server; className?: string }) =
                     <div css={tw`flex items-center gap-3 flex-wrap`}>
                         <p css={tw`text-lg break-words text-neutral-100 font-semibold tracking-tight`}>{server.name}</p>
                         <span
-                            css={tw`text-[0.65rem] uppercase tracking-[0.22em] rounded-full px-3 py-1 border`}
+                            css={tw`text-[0.65rem] uppercase tracking-[0.14em] rounded-lg px-2 py-1 border`}
                             style={{
-                                background: stats?.status === 'running' ? 'rgba(27, 181, 116, 0.14)' : stats?.status === 'starting' ? 'rgba(255, 193, 87, 0.14)' : 'rgba(137, 161, 172, 0.1)',
-                                borderColor: stats?.status === 'running' ? 'rgba(27, 181, 116, 0.2)' : stats?.status === 'starting' ? 'rgba(255, 193, 87, 0.2)' : 'rgba(137, 161, 172, 0.16)',
-                                color: stats?.status === 'running' ? '#9ef0cb' : stats?.status === 'starting' ? '#ffe5a0' : '#c2d0d8',
+                                background:
+                                    stats?.status === 'running'
+                                        ? 'rgba(27, 181, 116, 0.1)'
+                                        : stats?.status === 'starting'
+                                        ? 'rgba(255, 193, 87, 0.1)'
+                                        : 'var(--panel-background-muted)',
+                                borderColor:
+                                    stats?.status === 'running'
+                                        ? 'rgba(27, 181, 116, 0.2)'
+                                        : stats?.status === 'starting'
+                                        ? 'rgba(255, 193, 87, 0.2)'
+                                        : 'rgba(137, 161, 172, 0.16)',
+                                color:
+                                    stats?.status === 'running'
+                                        ? '#9ef0cb'
+                                        : stats?.status === 'starting'
+                                        ? '#ffe5a0'
+                                        : '#c2d0d8',
                             }}
                         >
                             {stats?.status || server.status || 'offline'}
@@ -114,8 +130,10 @@ export default ({ server, className }: { server: Server; className?: string }) =
                 </div>
             </div>
             <div css={tw`flex-1 ml-4 lg:block lg:col-span-2 hidden`}>
-                <div css={tw`flex justify-center items-center rounded-xl px-4 py-3 border`}
-                    style={{ background: 'rgba(255, 255, 255, 0.02)', borderColor: 'rgba(137, 161, 172, 0.12)' }}>
+                <div
+                    css={tw`flex justify-center items-center rounded-lg px-4 py-3 border`}
+                    style={{ background: 'var(--panel-background-strong)', borderColor: 'var(--panel-border)' }}
+                >
                     <FontAwesomeIcon icon={faEthernet} css={tw`text-cyan-400`} />
                     <p css={tw`text-sm text-neutral-300 ml-2`}>
                         {server.allocations
@@ -132,7 +150,9 @@ export default ({ server, className }: { server: Server; className?: string }) =
                 {!stats || isSuspended || server.isNodeUnderMaintenance ? (
                     isSuspended ? (
                         <div css={tw`flex-1 text-center`}>
-                            <span css={tw`rounded-full px-3 py-1 text-red-100 text-xs border border-red-400/20 bg-red-500/20`}>
+                            <span
+                                css={tw`rounded-full px-3 py-1 text-red-100 text-xs border border-red-400/20 bg-red-500/20`}
+                            >
                                 {server.status === 'suspended' ? 'Suspended' : 'Connection Error'}
                             </span>
                         </div>
@@ -144,7 +164,9 @@ export default ({ server, className }: { server: Server; className?: string }) =
                         </div>
                     ) : server.isTransferring || server.status ? (
                         <div css={tw`flex-1 text-center`}>
-                            <span css={tw`rounded-full px-3 py-1 text-neutral-100 text-xs border border-neutral-400/20 bg-neutral-500/20`}>
+                            <span
+                                css={tw`rounded-full px-3 py-1 text-neutral-100 text-xs border border-neutral-400/20 bg-neutral-500/20`}
+                            >
                                 {server.isTransferring
                                     ? 'Transferring'
                                     : server.status === 'installing'
@@ -166,7 +188,9 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {stats.cpuUsagePercent.toFixed(2)} %
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-xs text-neutral-500 text-center mt-1 uppercase tracking-[0.16em]`}>of {cpuLimit}</p>
+                            <p css={tw`text-xs text-neutral-500 text-center mt-1 uppercase tracking-[0.16em]`}>
+                                of {cpuLimit}
+                            </p>
                         </div>
                         <div css={tw`flex-1 ml-4 sm:block hidden`}>
                             <div css={tw`flex justify-center`}>
@@ -175,7 +199,9 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {bytesToString(stats.memoryUsageInBytes)}
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-xs text-neutral-500 text-center mt-1 uppercase tracking-[0.16em]`}>of {memoryLimit}</p>
+                            <p css={tw`text-xs text-neutral-500 text-center mt-1 uppercase tracking-[0.16em]`}>
+                                of {memoryLimit}
+                            </p>
                         </div>
                         <div css={tw`flex-1 ml-4 sm:block hidden`}>
                             <div css={tw`flex justify-center`}>
@@ -184,7 +210,9 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {bytesToString(stats.diskUsageInBytes)}
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-xs text-neutral-500 text-center mt-1 uppercase tracking-[0.16em]`}>of {diskLimit}</p>
+                            <p css={tw`text-xs text-neutral-500 text-center mt-1 uppercase tracking-[0.16em]`}>
+                                of {diskLimit}
+                            </p>
                         </div>
                     </React.Fragment>
                 )}

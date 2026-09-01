@@ -22,7 +22,7 @@ export interface ModalProps extends RequiredModalProps {
 
 export const ModalMask = styled.div`
     ${tw`fixed z-50 overflow-auto flex w-full inset-0`};
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(2, 8, 13, 0.82);
 `;
 
 const ModalContainer = styled.div<{ alignTop?: boolean }>`
@@ -42,12 +42,8 @@ const ModalContainer = styled.div<{ alignTop?: boolean }>`
     margin-bottom: auto;
 
     & > .close-icon {
-        ${tw`absolute right-0 p-2 text-white cursor-pointer opacity-50 transition-all duration-150 ease-linear hover:opacity-100`};
+        ${tw`absolute right-0 p-2 text-white cursor-pointer opacity-70 transition-opacity duration-150 ease-linear hover:opacity-100`};
         top: -2.5rem;
-
-        &:hover {
-            ${tw`transform rotate-90`}
-        }
 
         & > svg {
             ${tw`w-6 h-6`};
@@ -130,7 +126,7 @@ const Modal: React.FC<ModalProps> = ({
                         </Fade>
                     )}
                     <div
-                        css={tw`bg-neutral-800 p-3 sm:p-4 md:p-6 rounded shadow-md overflow-y-scroll transition-all duration-150`}
+                        css={tw`bg-neutral-800 p-4 sm:p-5 md:p-6 rounded-xl border border-neutral-600 shadow-none overflow-y-scroll transition-colors duration-150`}
                     >
                         {children}
                     </div>

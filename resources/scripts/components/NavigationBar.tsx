@@ -6,7 +6,7 @@ import { faCogs, faLayerGroup, faSignOutAlt } from '@fortawesome/free-solid-svg-
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import SearchContainer from '@/components/dashboard/search/SearchContainer';
-import tw, { theme } from 'twin.macro';
+import tw from 'twin.macro';
 import styled from 'styled-components/macro';
 import http from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
@@ -18,9 +18,8 @@ const Shell = styled.div`
     position: sticky;
     top: 0;
     z-index: 40;
-    background: rgba(7, 16, 24, 0.72);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(137, 161, 172, 0.12);
+    background: var(--panel-page);
+    border-bottom: 1px solid var(--panel-border);
     overflow: visible;
 `;
 
@@ -29,11 +28,11 @@ const BrandBlock = styled(Link)`
 `;
 
 const BrandMark = styled.div`
-    ${tw`flex items-center justify-center flex-none rounded-2xl`};
-    width: 2.75rem;
-    height: 2.75rem;
-    background: linear-gradient(135deg, rgba(40, 208, 216, 0.24) 0%, rgba(255, 255, 255, 0.08) 100%);
-    border: 1px solid rgba(40, 208, 216, 0.18);
+    ${tw`flex items-center justify-center flex-none rounded-xl`};
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--panel-highlight);
+    border: 1px solid rgba(0, 191, 207, 0.28);
 `;
 
 const BrandTitle = styled.div`
@@ -49,20 +48,20 @@ const RightNavigation = styled.div`
     & > button,
     & > .navigation-link {
         ${tw`flex items-center justify-center h-11 w-11 no-underline text-neutral-300 cursor-pointer transition-all duration-150 rounded-xl border border-transparent`};
-        background: rgba(255, 255, 255, 0.02);
+        background: var(--panel-background);
+        border-color: var(--panel-border);
 
         &:active,
         &:hover {
             ${tw`text-neutral-100`};
-            background: rgba(40, 208, 216, 0.08);
-            border-color: rgba(40, 208, 216, 0.18);
+            background: var(--panel-highlight);
+            border-color: rgba(0, 191, 207, 0.3);
         }
 
         &:active,
         &:hover,
         &.active {
-            border-color: rgba(40, 208, 216, 0.18);
-            outline: 1px solid rgba(40, 208, 216, 0.08);
+            border-color: rgba(0, 191, 207, 0.3);
         }
     }
 `;
@@ -83,7 +82,7 @@ export default () => {
     return (
         <Shell>
             <SpinnerOverlay visible={isLoggingOut} />
-            <div className={'mx-auto w-full flex items-center gap-4 min-h-[4.75rem] max-w-[1360px] px-2 sm:px-4'}>
+            <div className={'mx-auto w-full flex items-center gap-4 min-h-[4.5rem] max-w-[1440px] px-2 sm:px-6'}>
                 <div id={'logo'} className={'flex-1 min-w-0'}>
                     <BrandBlock to={'/'}>
                         <BrandMark>
