@@ -20,6 +20,7 @@ import { useLocation } from 'react-router';
 import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
 import PermissionRoute from '@/components/elements/PermissionRoute';
 import routes from '@/routers/routes';
+import ServerOverviewHeader from '@/components/server/ServerOverviewHeader';
 
 export default () => {
     const match = useRouteMatch<{ id: string }>();
@@ -73,6 +74,7 @@ export default () => {
                 )
             ) : (
                 <>
+                    <ServerOverviewHeader />
                     <CSSTransition timeout={150} classNames={'fade'} appear in>
                         <SubNavigation>
                             <div>

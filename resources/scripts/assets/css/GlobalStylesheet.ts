@@ -43,6 +43,20 @@ export default createGlobalStyle`
         overflow-x: hidden;
     }
 
+    #app {
+        background: var(--panel-page);
+    }
+
+    #app::before {
+        content: '';
+        position: fixed;
+        inset: 0 0 auto 0;
+        height: 1px;
+        background: rgba(0, 191, 207, 0.42);
+        pointer-events: none;
+        z-index: 100;
+    }
+
     h1, h2, h3, h4, h5, h6 {
         ${tw`font-medium tracking-normal font-header`};
     }
@@ -53,6 +67,10 @@ export default createGlobalStyle`
 
     a {
         color: inherit;
+    }
+
+    a, button, input, textarea, select {
+        -webkit-tap-highlight-color: transparent;
     }
 
     a:focus-visible,
@@ -69,6 +87,38 @@ export default createGlobalStyle`
 
     form {
         ${tw`m-0`};
+    }
+
+    hr {
+        border-color: var(--panel-border);
+    }
+
+    code, pre {
+        border: 1px solid var(--panel-border);
+        background: #071019;
+        color: #cceff2;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    [data-page-shell] {
+        min-height: calc(100vh - 4.5rem);
+    }
+
+    [data-page-heading] {
+        border-bottom: 1px solid var(--panel-border);
+        padding-bottom: 1rem;
+    }
+
+    [data-page-heading] h1 {
+        color: var(--panel-text);
+    }
+
+    [data-page-heading] p {
+        color: var(--panel-muted);
     }
 
     textarea, select, input, button, button:focus, button:focus-visible {

@@ -6,11 +6,22 @@ import FlashMessageRender from '@/components/FlashMessageRender';
 
 export interface PageContentBlockProps {
     title?: string;
+    heading?: string;
+    description?: string;
     className?: string;
     showFlashKey?: string;
 }
 
-const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey, className, children }) => {
+const PageContentBlock: React.FC<PageContentBlockProps> = ({
+    title,
+    heading,
+    description,
+    showFlashKey,
+    className,
+    children,
+}) => {
+    const pageHeading = heading || title;
+
     useEffect(() => {
         if (title) {
             document.title = `${title} | DarkInk Panel`;
@@ -20,7 +31,15 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
     return (
         <CSSTransition timeout={150} classNames={'fade'} appear in>
             <>
-                <ContentContainer css={tw`my-4 sm:my-6 lg:my-8`} className={className}>
+                <ContentContainer css={tw`my-4 sm:my-6 lg:my-8`} className={className} data-page-shell>
+                    {(pageHeading || description) && (
+                        <div data-page-heading css={tw`mb-5 sm:mb-6 flex flex-col gap-1`}>
+                            {pageHeading && (
+                                <h1 css={tw`text-2xl sm:text-3xl font-semibold tracking-tight`}>{pageHeading}</h1>
+                            )}
+                            {description && <p css={tw`text-sm sm:text-base`}>{description}</p>}
+                        </div>
+                    )}
                     {showFlashKey && <FlashMessageRender byKey={showFlashKey} css={tw`mb-4`} />}
                     {children}
                 </ContentContainer>

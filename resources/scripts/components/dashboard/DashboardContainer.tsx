@@ -96,7 +96,12 @@ export default () => {
             : `${Math.round(totalMemory / 1024)} GB`;
 
     return (
-        <PageContentBlock title={'Dashboard'} showFlashKey={'dashboard'}>
+        <PageContentBlock
+            title={'Dashboard'}
+            heading={'Your infrastructure'}
+            description={'Monitor and manage every server available to your account.'}
+            showFlashKey={'dashboard'}
+        >
             {rootAdmin && (
                 <div css={tw`mb-6 flex justify-end items-center`}>
                     <p css={tw`uppercase text-xs text-neutral-400 mr-2 tracking-[0.18em]`}>
