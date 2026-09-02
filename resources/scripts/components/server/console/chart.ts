@@ -22,7 +22,15 @@ const options: ChartOptions<'line'> = {
     plugins: {
         legend: { display: false },
         title: { display: false },
-        tooltip: { enabled: false },
+        tooltip: {
+            enabled: true,
+            displayColors: false,
+            backgroundColor: '#0f1a24',
+            borderColor: 'rgba(0, 191, 207, 0.32)',
+            borderWidth: 1,
+            titleColor: '#edf4f7',
+            bodyColor: '#b7cbd3',
+        },
     },
     layout: {
         padding: 0,
@@ -45,13 +53,13 @@ const options: ChartOptions<'line'> = {
             type: 'linear',
             grid: {
                 display: true,
-                color: theme('colors.gray.700'),
+                color: 'rgba(142, 170, 183, 0.12)',
                 drawBorder: false,
             },
             ticks: {
                 display: true,
                 count: 3,
-                color: theme('colors.gray.200'),
+                color: theme('colors.gray.400'),
                 font: {
                     family: theme('fontFamily.sans'),
                     size: 11,
@@ -65,7 +73,8 @@ const options: ChartOptions<'line'> = {
             radius: 0,
         },
         line: {
-            tension: 0.15,
+            tension: 0.28,
+            borderWidth: 2,
         },
     },
 };
@@ -88,11 +97,11 @@ function getEmptyData(label: string, sets = 1, callback?: ChartDatasetCallback |
             .map((_, index) =>
                 next(
                     {
-                        fill: true,
+                        fill: false,
                         label,
                         data: Array(20).fill(-5),
                         borderColor: theme('colors.cyan.400'),
-                        backgroundColor: hexToRgba(theme('colors.cyan.700'), 0.5),
+                        backgroundColor: hexToRgba(theme('colors.cyan.700'), 0),
                     },
                     index
                 )
@@ -139,7 +148,7 @@ function useChart(label: string, opts?: UseChartOptions) {
     return { props: { data, options }, push, clear };
 }
 
-function useChartTickLabel(label: string, max: number, tickLabel: string, roundTo?: number) {
+function useChartTickLabel(label: string, max: number | undefined, tickLabel: string, roundTo?: number) {
     return useChart(label, {
         sets: 1,
         options: {

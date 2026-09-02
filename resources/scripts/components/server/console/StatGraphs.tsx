@@ -16,7 +16,7 @@ export default () => {
     const limits = ServerContext.useStoreState((state) => state.server.data!.limits);
     const previous = useRef<Record<'tx' | 'rx', number>>({ tx: -1, rx: -1 });
 
-    const cpu = useChartTickLabel('CPU', limits.cpu, '%', 2);
+    const cpu = useChartTickLabel('CPU', undefined, '%', 2);
     const memory = useChartTickLabel('Memory', limits.memory, 'MiB');
     const network = useChart('Network', {
         sets: 2,
@@ -35,8 +35,8 @@ export default () => {
             return {
                 ...opts,
                 label: !index ? 'Network In' : 'Network Out',
-                borderColor: !index ? theme('colors.cyan.400') : theme('colors.yellow.400'),
-                backgroundColor: hexToRgba(!index ? theme('colors.cyan.700') : theme('colors.yellow.700'), 0.5),
+                borderColor: !index ? theme('colors.cyan.400') : theme('colors.gray.300'),
+                backgroundColor: hexToRgba(!index ? theme('colors.cyan.700') : theme('colors.gray.500'), 0),
             };
         },
     });
@@ -59,8 +59,8 @@ export default () => {
         cpu.push(values.cpu_absolute);
         memory.push(Math.floor(values.memory_bytes / 1024 / 1024));
         network.push([
-            previous.current.tx < 0 ? 0 : Math.max(0, values.network.tx_bytes - previous.current.tx),
             previous.current.rx < 0 ? 0 : Math.max(0, values.network.rx_bytes - previous.current.rx),
+            previous.current.tx < 0 ? 0 : Math.max(0, values.network.tx_bytes - previous.current.tx),
         ]);
 
         previous.current = { tx: values.network.tx_bytes, rx: values.network.rx_bytes };
@@ -68,21 +68,21 @@ export default () => {
 
     return (
         <>
-            <ChartBlock title={'CPU Load'}>
+            <ChartBlock title={'CPU usage'}>
                 <Line {...cpu.props} />
             </ChartBlock>
-            <ChartBlock title={'Memory'}>
+            <ChartBlock title={'Memory usage'}>
                 <Line {...memory.props} />
             </ChartBlock>
             <ChartBlock
-                title={'Network'}
+                title={'Network transfer'}
                 legend={
                     <>
                         <Tooltip arrow content={'Inbound'}>
-                            <CloudDownloadIcon className={'mr-2 w-4 h-4 text-yellow-400'} />
+                            <CloudDownloadIcon className={'mr-2 w-4 h-4 text-cyan-300'} />
                         </Tooltip>
                         <Tooltip arrow content={'Outbound'}>
-                            <CloudUploadIcon className={'w-4 h-4 text-cyan-400'} />
+                            <CloudUploadIcon className={'w-4 h-4 text-gray-300'} />
                         </Tooltip>
                     </>
                 }
