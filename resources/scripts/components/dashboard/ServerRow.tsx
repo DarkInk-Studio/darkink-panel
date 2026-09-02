@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEthernet, faHdd, faMemory, faMicrochip, faServer } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Server } from '@/api/server/getServer';
 import getServerResourceUsage, { ServerPowerState, ServerStats } from '@/api/server/getServerResourceUsage';
 import { bytesToString, ip, mbToBytes } from '@/lib/formatters';
@@ -10,6 +10,9 @@ import GreyRowBox from '@/components/elements/GreyRowBox';
 import Spinner from '@/components/elements/Spinner';
 import styled from 'styled-components/macro';
 import isEqual from 'react-fast-compare';
+import ServerPowerActions from '@/components/dashboard/ServerPowerActions';
+import sendPowerSignal, { PowerSignal } from '@/api/server/sendPowerSignal';
+import useFlash from '@/plugins/useFlash';
 
 // Determines if the current value is in an alarm threshold so we can show it in red rather
 // than the more faded default style.
@@ -51,9 +54,12 @@ const StatusIndicatorBox = styled(GreyRowBox)<{ $status: ServerPowerState | unde
 type Timer = ReturnType<typeof setInterval>;
 
 export default ({ server, className }: { server: Server; className?: string }) => {
+    const history = useHistory();
     const interval = useRef<Timer>(null) as React.MutableRefObject<Timer>;
     const [isSuspended, setIsSuspended] = useState(server.status === 'suspended');
     const [stats, setStats] = useState<ServerStats | null>(null);
+    const [isSubmittingPowerAction, setIsSubmittingPowerAction] = useState(false);
+    const { clearAndAddHttpError } = useFlash();
 
     const getStats = () =>
         getServerResourceUsage(server.uuid)
@@ -88,10 +94,36 @@ export default ({ server, className }: { server: Server; className?: string }) =
     const diskLimit = server.limits.disk !== 0 ? bytesToString(mbToBytes(server.limits.disk)) : 'Unlimited';
     const memoryLimit = server.limits.memory !== 0 ? bytesToString(mbToBytes(server.limits.memory)) : 'Unlimited';
     const cpuLimit = server.limits.cpu !== 0 ? server.limits.cpu + ' %' : 'Unlimited';
+    const powerActionsDisabled = isSuspended || server.isNodeUnderMaintenance || server.isTransferring;
+
+    const onPowerAction = (signal: PowerSignal) => {
+        setIsSubmittingPowerAction(true);
+        sendPowerSignal(server.uuid, signal)
+            .then(() => getStats())
+            .catch((error) => clearAndAddHttpError({ key: 'dashboard', error }))
+            .finally(() => setIsSubmittingPowerAction(false));
+    };
+
+    const onNavigate = () => history.push(`/server/${server.id}`);
+
+    const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            onNavigate();
+        }
+    };
 
     return (
-        <StatusIndicatorBox as={Link} to={`/server/${server.id}`} className={className} $status={stats?.status}>
-            <div css={tw`flex items-center col-span-12 sm:col-span-5 lg:col-span-6`}>
+        <StatusIndicatorBox
+            className={className}
+            $status={stats?.status}
+            role={'link'}
+            tabIndex={0}
+            css={tw`cursor-pointer`}
+            onClick={onNavigate}
+            onKeyDown={onKeyDown}
+        >
+            <div css={tw`flex items-center col-span-12 sm:col-span-5 lg:col-span-4`}>
                 <div className={'icon mr-4'}>
                     <FontAwesomeIcon icon={faServer} />
                 </div>
@@ -146,7 +178,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                     </p>
                 </div>
             </div>
-            <div css={tw`hidden col-span-7 lg:col-span-4 sm:flex items-baseline justify-center`}>
+            <div css={tw`hidden col-span-7 lg:col-span-3 sm:flex items-baseline justify-center`}>
                 {!stats || isSuspended || server.isNodeUnderMaintenance ? (
                     isSuspended ? (
                         <div css={tw`flex-1 text-center`}>
@@ -216,6 +248,15 @@ export default ({ server, className }: { server: Server; className?: string }) =
                         </div>
                     </React.Fragment>
                 )}
+            </div>
+            <div css={tw`col-span-12 sm:col-span-12 lg:col-span-3 flex items-center justify-end`}>
+                <ServerPowerActions
+                    server={server}
+                    status={stats?.status}
+                    disabled={powerActionsDisabled}
+                    isSubmitting={isSubmittingPowerAction}
+                    onAction={onPowerAction}
+                />
             </div>
             <div className={'status-bar'} />
         </StatusIndicatorBox>

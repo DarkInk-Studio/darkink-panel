@@ -10,6 +10,7 @@ use Pterodactyl\Models\Allocation;
 use Pterodactyl\Models\Permission;
 use Illuminate\Container\Container;
 use Pterodactyl\Models\EggVariable;
+use Pterodactyl\Services\Servers\GetUserPermissionsService;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\NullResource;
 use Pterodactyl\Services\Servers\StartupCommandService;
@@ -83,6 +84,7 @@ class ServerTransformer extends BaseClientTransformer
             'is_installing' => !$server->isInstalled(),
             'is_transferring' => !is_null($server->transfer),
             'skip_scripts' => $server->skip_scripts,
+            'permissions' => Container::getInstance()->make(GetUserPermissionsService::class)->handle($server, $user),
         ];
     }
 
