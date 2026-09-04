@@ -51,7 +51,6 @@ const DisableTOTPDialog = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)}
             />
             <Dialog.Footer>
-                <Button.Text onClick={close}>Cancel</Button.Text>
                 <Tooltip
                     delay={100}
                     disabled={password.length > 0}
@@ -61,6 +60,7 @@ const DisableTOTPDialog = () => {
                         Disable
                     </Button.Danger>
                 </Tooltip>
+                <Button.Text onClick={close}>Cancel</Button.Text>
             </Dialog.Footer>
         </form>
     );

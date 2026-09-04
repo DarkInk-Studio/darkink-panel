@@ -83,8 +83,8 @@
                 </div>
                 <div class="modal-footer">
                     {{ csrf_field() }}
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Import</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>

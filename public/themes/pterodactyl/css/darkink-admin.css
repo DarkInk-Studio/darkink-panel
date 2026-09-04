@@ -663,6 +663,20 @@ label {
     font-weight: 700;
 }
 
+.sweet-alert .sa-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sweet-alert .sa-confirm-button-container {
+    order: 1;
+}
+
+.sweet-alert button.cancel {
+    order: 2;
+}
+
 .main-footer {
     margin-left: 268px !important;
     background: transparent !important;

@@ -92,12 +92,12 @@ const NewDirectoryDialog = asDialog({
                         </p>
                     </Form>
                     <Dialog.Footer>
-                        <Button.Text className={'w-full sm:w-auto'} onClick={close}>
-                            Cancel
-                        </Button.Text>
                         <Button className={'w-full sm:w-auto'} onClick={submitForm}>
                             Create
                         </Button>
+                        <Button.Text className={'w-full sm:w-auto'} onClick={close}>
+                            Cancel
+                        </Button.Text>
                     </Dialog.Footer>
                 </>
             )}

@@ -100,7 +100,6 @@ const ConfigureTwoFactorForm = ({ onTokens }: Props) => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)}
             />
             <Dialog.Footer>
-                <Button.Text onClick={close}>Cancel</Button.Text>
                 <Tooltip
                     disabled={password.length > 0 && value.length === 6}
                     content={
@@ -118,6 +117,7 @@ const ConfigureTwoFactorForm = ({ onTokens }: Props) => {
                         Enable
                     </Button>
                 </Tooltip>
+                <Button.Text onClick={close}>Cancel</Button.Text>
             </Dialog.Footer>
         </form>
     );

@@ -90,16 +90,16 @@ export default () => {
                                 />
                             </div>
                             <div css={tw`flex flex-wrap justify-end mt-6`}>
+                                <Button css={tw`w-full sm:w-auto sm:mr-2`} type={'submit'}>
+                                    Create Database
+                                </Button>
                                 <Button
                                     type={'button'}
                                     isSecondary
-                                    css={tw`w-full sm:w-auto sm:mr-2`}
+                                    css={tw`w-full mt-4 sm:w-auto sm:mt-0`}
                                     onClick={() => setVisible(false)}
                                 >
                                     Cancel
-                                </Button>
-                                <Button css={tw`w-full mt-4 sm:w-auto sm:mt-0`} type={'submit'}>
-                                    Create Database
                                 </Button>
                             </div>
                         </Form>

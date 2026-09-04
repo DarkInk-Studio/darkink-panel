@@ -61,11 +61,15 @@ const HytaleOauthRequireFeature = () => {
                 continue.
             </p>
             <div css={tw`mt-8 sm:flex items-center justify-end`}>
-                <Button isSecondary onClick={() => setVisible(false)} css={tw`w-full sm:w-auto border-transparent`}>
-                    Cancel
-                </Button>
-                <Button onClick={handleLogin} css={tw`mt-4 sm:mt-0 sm:ml-4 w-full sm:w-auto`}>
+                <Button onClick={handleLogin} css={tw`w-full sm:w-auto`}>
                     Log in
+                </Button>
+                <Button
+                    isSecondary
+                    onClick={() => setVisible(false)}
+                    css={tw`mt-4 sm:mt-0 sm:ml-4 w-full sm:w-auto border-transparent`}
+                >
+                    Cancel
                 </Button>
             </div>
         </Modal>
